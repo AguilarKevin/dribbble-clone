@@ -30,7 +30,7 @@ export default function Cards() {
 }
 
 async function getImages() {
-  const data = await ky('http://localhost:8000/api/posts', {
+  const data = await ky('https://clone-dribbble-api.herokuapp.com/api/posts', {
     headers: {
       Authorization: 'Bearer H93gMy7rFtkecUpFBRLSgtKEPD1llrS83GHuW1yP',
     },
