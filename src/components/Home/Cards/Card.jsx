@@ -5,7 +5,7 @@ import CardInfo from './CardInfo'
 export default function Card({ image, likes, views, username, tag, avatar }) {
   return (
     <div w="100%" h="300px">
-      <Image height="avaliable" borderRadius="8px" src={image} />
+      <Image height="230px" objectFit="cover" borderRadius="8px" src={image} />
       <CardInfo avatar={avatar} tag={tag} username={username} />
     </div>
   )

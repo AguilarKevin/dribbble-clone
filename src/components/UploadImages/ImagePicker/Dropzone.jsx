@@ -1,7 +1,7 @@
-import { Center, Image, Text, Flex } from '@chakra-ui/react';
-import React, { useMemo } from 'react';
-import { useDropzone } from 'react-dropzone';
-import imagePlaceHolder from '../../../assets/picture-placeholder.png';
+import { Center, Image, Text, Flex } from '@chakra-ui/react'
+import React, { useMemo } from 'react'
+import { useDropzone } from 'react-dropzone'
+import imagePlaceHolder from '../../../assets/picture-placeholder.png'
 
 const baseStyle = {
   flex: 1,
@@ -22,28 +22,29 @@ const baseStyle = {
   color: '#444',
   outline: 'none',
   transition: 'border .24s ease-in-out',
-};
+}
 
 const activeStyle = {
   borderColor: '#2196f3',
-};
+}
 
 const acceptStyle = {
   borderColor: '#00e676',
-};
+}
 
 const rejectStyle = {
   borderColor: '#ff1744',
-};
+}
 
 export default function Dropzone(props) {
   const {
+    acceptedFiles,
     getRootProps,
     getInputProps,
     isDragActive,
     isDragAccept,
     isDragReject,
-  } = useDropzone({ accept: 'image/*' });
+  } = useDropzone({ accept: 'image/*', maxFiles: 1 })
 
   const style = useMemo(
     () => ({
@@ -53,18 +54,23 @@ export default function Dropzone(props) {
       ...(isDragReject ? rejectStyle : {}),
     }),
     [isDragActive, isDragReject, isDragAccept]
-  );
+  )
 
   return (
     <Center>
       <Flex {...getRootProps({ style })}>
-        <input {...getInputProps()} />
+        <input className="inputImages" name="image" {...getInputProps()} />
         <Image src={imagePlaceHolder} width="80px" mb="12px" height="86px" />
         <Text mb="12px">Drag and drop an image, or Browse</Text>
         <Text>
           1600x1200 or higher recommended. Max 10MB each (20MB for videos)
         </Text>
+        {acceptedFiles.map(file => (
+          <li key={file.path}>
+            {file.path} - {file.size} bytes
+          </li>
+        ))}
       </Flex>
     </Center>
-  );
+  )
 }

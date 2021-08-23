@@ -1,28 +1,14 @@
-import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons';
-import {
-  Button,
-  Flex,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-  useDisclosure,
-  TabList,
-  Spacer,
-  Icon,
-} from '@chakra-ui/react';
+import { Flex, useDisclosure } from '@chakra-ui/react'
 
-import React from 'react';
-import TabItem from './TabItem';
+import React from 'react'
 
-import Filters from './Filters/Filters';
-import Tabs from './Tabs';
-import Dropdown from './Dropdown';
-import FilterDropdown from './Filters/FilterDropdown';
+import Filters from './Filters/Filters'
+import Tabs from './Tabs'
+import Dropdown from './Dropdown'
+import FilterDropdown from './Filters/FilterDropdown'
 
 export default function Toolbar() {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure()
 
   return (
     <div>
@@ -33,5 +19,5 @@ export default function Toolbar() {
       </Flex>
       <Filters isOpen={isOpen} />
     </div>
-  );
+  )
 }

@@ -16,12 +16,13 @@ export default function Cards() {
       {data.map(item => {
         return (
           <Card
+            key={item.id}
             image={item.image}
             likes={item.likes}
             views={item.views}
-            username="nerdify"
-            tag="team"
-            avatar="https://cdn.dribbble.com/users/6395846/avatars/mini/f8c70deab558ca91b520afb34601979a.png?1605804828"
+            username={item.user.name}
+            tag={item.user.tag}
+            avatar={item.user.avatar}
           />
         )
       })}
@@ -30,11 +31,11 @@ export default function Cards() {
 }
 
 async function getImages() {
-  const data = await ky('https://clone-dribbble-api.herokuapp.com/api/posts', {
+  const data = await ky('http://localhost:8000/api/uploads', {
     headers: {
       Authorization: 'Bearer H93gMy7rFtkecUpFBRLSgtKEPD1llrS83GHuW1yP',
     },
   }).json()
-  console.log(data.data)
+
   return data.data
 }

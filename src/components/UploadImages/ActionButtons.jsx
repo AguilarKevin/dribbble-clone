@@ -1,6 +1,6 @@
-import { Button, Flex, Spacer } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import React from 'react';
+import { Button, Flex, Spacer } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
+import React from 'react'
 
 export default function ActionButtons() {
   return (
@@ -23,6 +23,7 @@ export default function ActionButtons() {
           Save as draft
         </Button>
         <Button
+          type="submit"
           size="sm"
           paddingBlock="5"
           paddingInline="6"
@@ -34,5 +35,5 @@ export default function ActionButtons() {
         </Button>
       </Flex>
     </Flex>
-  );
+  )
 }

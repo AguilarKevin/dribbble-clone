@@ -1,19 +1,9 @@
-import { SearchIcon } from '@chakra-ui/icons';
-import {
-  Avatar,
-  Button,
-  Flex,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Wrap,
-} from '@chakra-ui/react';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Avatar, Button, Flex, Image, Wrap } from '@chakra-ui/react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import bagSvg from '../../assets/bag.svg';
-import NavSearchInput from './NavSearchInput';
+import bagSvg from '../../assets/bag.svg'
+import NavSearchInput from './NavSearchInput'
 
 export default function NavActions() {
   return (
@@ -44,5 +34,5 @@ export default function NavActions() {
         </Button>
       </Link>
     </Flex>
-  );
+  )
 }
