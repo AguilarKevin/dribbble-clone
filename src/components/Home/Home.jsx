@@ -1,7 +1,7 @@
-import { Tabs } from '@chakra-ui/react';
-import React from 'react';
-import Content from './Cards/Content';
-import Toolbar from './Toolbar/Toolbar';
+import { Tabs } from '@chakra-ui/react'
+import React from 'react'
+import Content from './Cards/Content'
+import Toolbar from './Toolbar/Toolbar'
 
 export default function Home() {
   return (
@@ -11,5 +11,5 @@ export default function Home() {
         <Content />
       </Tabs>
     </React.Fragment>
-  );
+  )
 }

@@ -11,27 +11,38 @@ import UploadImages from './components/UploadImages/UploadImages.jsx'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AppContext } from './AppContextProvider.js'
 
-const queryClient = new QueryClient()
+const userQueryClient = new QueryClient()
+
+const postsQueryClient = new QueryClient()
+
+const body = (
+  <>
+    <QueryClientProvider client={userQueryClient}>
+      <Navigation />
+    </QueryClientProvider>
+
+    <QueryClientProvider client={postsQueryClient}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="uploads/new" element={<UploadImages />} />
+      </Routes>
+    </QueryClientProvider>
+  </>
+)
+
+const app = (
+  <AppContext.Provider
+    value={{
+      api: {
+        url: 'http://127.0.0.1:8000/api',
+        token: 'Bearer H93gMy7rFtkecUpFBRLSgtKEPD1llrS83GHuW1yP',
+      },
+    }}
+  >
+    <ChakraProvider theme={theme}>{body}</ChakraProvider>
+  </AppContext.Provider>
+)
 
 export default function App() {
-  return (
-    <AppContext.Provider
-      value={{
-        api: {
-          url: 'http://127.0.0.1:8000/api',
-          token: 'Bearer H93gMy7rFtkecUpFBRLSgtKEPD1llrS83GHuW1yP',
-        },
-      }}
-    >
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider theme={theme}>
-          <Navigation />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="uploads/new" element={<UploadImages />} />
-          </Routes>
-        </ChakraProvider>
-      </QueryClientProvider>
-    </AppContext.Provider>
-  )
+  return app
 }

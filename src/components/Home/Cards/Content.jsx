@@ -1,6 +1,6 @@
-import { TabPanel, TabPanels } from '@chakra-ui/react';
-import React from 'react';
-import Cards from './Cards';
+import React from 'react'
+import Cards from './Cards'
+import { TabPanel, TabPanels } from '@chakra-ui/react'
 
 export default function Content() {
   return (
@@ -9,5 +9,5 @@ export default function Content() {
         <Cards />
       </TabPanel>
     </TabPanels>
-  );
+  )
 }

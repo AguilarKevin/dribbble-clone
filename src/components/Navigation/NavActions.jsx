@@ -5,34 +5,46 @@ import { Link } from 'react-router-dom'
 import bagSvg from '../../assets/bag.svg'
 import NavSearchInput from './NavSearchInput'
 
+import { useQuery } from 'react-query'
+import { AppContext } from '../../AppContextProvider'
+import { getUser } from '../../providers/UserProvider'
+
+const avatar = user => (
+  <Avatar marginInlineEnd="4" name={user?.name} src={user?.avatar} size="sm" />
+)
+
+const uploadButton = (
+  <Link to="/uploads/new">
+    <Button
+      borderRadius={8}
+      fontSize={12}
+      paddingBlock="0px"
+      paddingInline="4"
+      color="white"
+      bg="pink.400"
+      colorScheme="pink"
+    >
+      Upload
+    </Button>
+  </Link>
+)
+
+const bagIcon = (
+  <Wrap marginInlineEnd="5" shouldWrapChildren="false" align="center">
+    <Image src={bagSvg} width="34px" />
+  </Wrap>
+)
+
 export default function NavActions() {
+  const { api } = React.useContext(AppContext)
+  const { data } = useQuery(['posts', api], () => getUser(api))
+
   return (
     <Flex align="center">
       <NavSearchInput />
-      <Wrap marginInlineEnd="5" shouldWrapChildren="false" align="center">
-        <Image src={bagSvg} width="34px" />
-      </Wrap>
-
-      <Avatar
-        marginInlineEnd="4"
-        name="Ryan Florence"
-        src="https://bit.ly/ryan-florence"
-        size="sm"
-      />
-
-      <Link to="/uploads/new">
-        <Button
-          borderRadius={8}
-          fontSize={12}
-          paddingBlock="0px"
-          paddingInline="4"
-          color="white"
-          bg="pink.400"
-          colorScheme="pink"
-        >
-          Upload
-        </Button>
-      </Link>
+      {bagIcon}
+      {data && avatar(data)}
+      {uploadButton}
     </Flex>
   )
 }
