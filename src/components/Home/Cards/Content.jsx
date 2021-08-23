@@ -1,13 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Cards from './Cards'
-import {
-  Button,
-  Center,
-  Flex,
-  Spinner,
-  TabPanel,
-  TabPanels,
-} from '@chakra-ui/react'
+import { Button, Flex, Spinner, TabPanel, TabPanels } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
 import { AppContext } from '../../../AppContextProvider'
 import { getImages } from '../../../providers/PostsProvider'
@@ -16,8 +9,15 @@ export default function Content() {
   const { api } = React.useContext(AppContext)
   const [page, setPage] = React.useState(1)
   const [allPost, setAllPost] = React.useState([])
-  const { isLoading, data } = useQuery(['posts', api, page], () =>
-    getImages(api, page)
+  const { isLoading, data } = useQuery(
+    ['posts', api, page],
+    () => getImages(api, page),
+    {
+      keepPreviousData: true,
+      onSuccess: data => {
+        setAllPost([...allPost, ...data.data])
+      },
+    }
   )
 
   return (
@@ -39,9 +39,6 @@ export default function Content() {
           <Flex py={3} align="center" justify="center">
             <Button
               onClick={() => {
-                console.log(`state: ${page}`)
-                console.log(`alldata: ${allPost}`)
-                setAllPost([...allPost, ...data?.data])
                 setPage(page + 1)
               }}
             >
