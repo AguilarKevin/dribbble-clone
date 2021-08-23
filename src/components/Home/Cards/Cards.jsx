@@ -3,39 +3,30 @@ import React from 'react'
 import Card from './Card'
 import { useQuery } from 'react-query'
 import ky from 'ky'
+import { AppContext } from '../../../AppContextProvider'
 
 export default function Cards() {
-  const { isLoading, error, data } = useQuery('posts', getImages)
+  const { api } = React.useContext(AppContext)
+  const { isLoading, data } = useQuery(['posts', api], () => getImages(api))
 
-  if (isLoading) return 'Loading...'
-
-  if (error) return 'An error has occurred: ' + error.message
-
-  return (
+  return isLoading ? (
+    'Loading...'
+  ) : (
     <Grid gridTemplateColumns="repeat(auto-fill, minmax(260px, 1fr))" gap={10}>
-      {data.map(item => {
-        return (
-          <Card
-            key={item.id}
-            image={item.image}
-            likes={item.likes}
-            views={item.views}
-            username={item.user.name}
-            tag={item.user.tag}
-            avatar={item.user.avatar}
-          />
-        )
+      {data.map(post => {
+        return <Card {...post} />
       })}
     </Grid>
   )
 }
 
-async function getImages() {
-  const data = await ky('http://localhost:8000/api/uploads', {
+async function getImages(api) {
+  console.log(api)
+  const { data } = await ky(`${api.url}/uploads`, {
     headers: {
-      Authorization: 'Bearer H93gMy7rFtkecUpFBRLSgtKEPD1llrS83GHuW1yP',
+      Authorization: api.token,
     },
   }).json()
 
-  return data.data
+  return data
 }
