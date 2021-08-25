@@ -5,7 +5,7 @@ import React from 'react'
 export default function ActionButtons() {
   return (
     <Flex paddingInline="6" paddingBlockStart="6" position="sticky" top="0">
-      <Link to="/">
+      <Link to="/shots">
         <Button variant="outline" fontSize="sm">
           Cancel
         </Button>

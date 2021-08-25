@@ -1,5 +1,6 @@
 import { Tabs } from '@chakra-ui/react'
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 import Content from './Cards/Content'
 import Toolbar from './Toolbar/Toolbar'
 
@@ -10,6 +11,7 @@ export default function Home() {
         <Toolbar />
         <Content />
       </Tabs>
+      <Outlet />
     </React.Fragment>
   )
 }

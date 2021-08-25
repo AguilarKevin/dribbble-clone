@@ -1,6 +1,6 @@
 import React from 'react'
 import { ChakraProvider, theme } from '@chakra-ui/react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 
 import Navigation from './components/Navigation/Navigation.jsx'
 
@@ -10,39 +10,47 @@ import UploadImages from './components/UploadImages/UploadImages.jsx'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AppContext } from './AppContextProvider.js'
-
-const userQueryClient = new QueryClient()
-
-const postsQueryClient = new QueryClient()
-
-const body = (
-  <>
-    <QueryClientProvider client={userQueryClient}>
-      <Navigation />
-    </QueryClientProvider>
-
-    <QueryClientProvider client={postsQueryClient}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="uploads/new" element={<UploadImages />} />
-      </Routes>
-    </QueryClientProvider>
-  </>
-)
-
-const app = (
-  <AppContext.Provider
-    value={{
-      api: {
-        url: 'http://127.0.0.1:8000/api',
-        token: 'Bearer H93gMy7rFtkecUpFBRLSgtKEPD1llrS83GHuW1yP',
-      },
-    }}
-  >
-    <ChakraProvider theme={theme}>{body}</ChakraProvider>
-  </AppContext.Provider>
-)
+import ViewShotModal from './components/ViewShotModal/ViewShotModal.jsx'
 
 export default function App() {
-  return app
+  const userQueryClient = new QueryClient()
+  const postsQueryClient = new QueryClient()
+
+  let location = useLocation()
+
+  return (
+    <AppContext.Provider
+      value={{
+        api: {
+          url: 'http://127.0.0.1:8000/api',
+          token: 'Bearer s4FO4uyMc5roGRtV1zrW9InT7x2K18I3xO0nRB7d',
+        },
+      }}
+    >
+      <ChakraProvider theme={theme}>
+        <QueryClientProvider client={userQueryClient}>
+          <Navigation />
+        </QueryClientProvider>
+
+        <QueryClientProvider client={postsQueryClient}>
+          <Routes>
+            <Route exact path="/">
+              <Navigate to="/shots" />
+            </Route>
+            <Route path="uploads/new" element={<UploadImages />} />
+            <Route path="/shots" element={<Home />}>
+              <Route
+                path="/:id"
+                element={
+                  <ViewShotModal
+                    shotId={location.pathname.replace('/shots/', '')}
+                  />
+                }
+              />
+            </Route>
+          </Routes>
+        </QueryClientProvider>
+      </ChakraProvider>
+    </AppContext.Provider>
+  )
 }
