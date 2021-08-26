@@ -44,7 +44,7 @@ export default function ViewShotModal({ shotId }) {
     <Modal
       onClose={() => {
         setOpen(false)
-        navigate('/shots')
+        navigate(-1)
       }}
       size="full"
       isOpen={open}

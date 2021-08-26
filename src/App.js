@@ -11,6 +11,7 @@ import UploadImages from './components/UploadImages/UploadImages.jsx'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AppContext } from './AppContextProvider.js'
 import ViewShotModal from './components/ViewShotModal/ViewShotModal.jsx'
+import Tags from './components/Tags/Tags.jsx'
 
 export default function App() {
   const userQueryClient = new QueryClient()
@@ -36,19 +37,22 @@ export default function App() {
           <Routes>
             <Route exact path="/">
               <Navigate to="/shots" />
-            </Route>
-            <Route path="uploads/new" element={<UploadImages />} />
-            <Route path="/shots" element={<Home />}>
+              <Route path="uploads/new" element={<UploadImages />} />
+              <Route path="/shots" element={<Home />}>
+                <Route
+                  path="/:id"
+                  element={
+                    <ViewShotModal
+                      shotId={location.pathname.replace('/shots/', '')}
+                    />
+                  }
+                />
+              </Route>
               <Route
-                path="/:id"
-                element={
-                  <ViewShotModal
-                    shotId={location.pathname.replace('/shots/', '')}
-                  />
-                }
+                path="/tags/:tag"
+                element={<Tags tag={location.pathname.replace('/tags/', '')} />}
               />
             </Route>
-            <Route path="/tags/:tag" ele />
           </Routes>
         </QueryClientProvider>
       </ChakraProvider>
