@@ -5,5 +5,6 @@ export async function getImages(api, page) {
 }
 
 export async function getShot(api, id) {
-  return await ky(`${api.url}/shots/${id}`, {}).json()
+  const response = await ky(`${api.url}/shots/${id}`, {}).json()
+  return response.data
 }

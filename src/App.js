@@ -23,7 +23,7 @@ export default function App() {
       value={{
         api: {
           url: 'http://127.0.0.1:8000/api',
-          token: 'Bearer s4FO4uyMc5roGRtV1zrW9InT7x2K18I3xO0nRB7d',
+          token: 'Bearer luSegdwd3bYbIyvy9kzPIZC7hGz7GXHYaZM6Mbc2',
         },
       }}
     >
@@ -48,6 +48,7 @@ export default function App() {
                 }
               />
             </Route>
+            <Route path="/tags/:tag" ele />
           </Routes>
         </QueryClientProvider>
       </ChakraProvider>
