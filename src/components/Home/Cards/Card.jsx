@@ -1,54 +1,60 @@
-import { Box, Flex, IconButton, Image, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Flex, IconButton, Image, Stack, Text } from '@chakra-ui/react'
+import React, { useRef } from 'react'
 import CardInfo from './CardInfo'
 import HeartIcon from '../../../assets/heart.svg'
 import SaveIcon from '../../../assets/save-folder.svg'
 
-function onMouseOver(e) {
-  e.target.parentElement.querySelector('video').play()
-}
-function onMouseOut(e) {
-  e.target.parentElement.querySelector('video').pause()
-}
-function isVideo(mimetype) {
-  return mimetype === 'video'
-}
-
 export default function Card({ title, media, likes, views, user }) {
   return (
-    <div w="100%" h="300px">
-      <Box
-        position="relative"
-        onMouseEnter={isVideo(media[0].mimetype) ? onMouseOver : null}
-        onMouseOut={isVideo(media[0].mimetype) ? onMouseOut : null}
-      >
-        {mediaview(media)}
-        {hoverButtons(title)}
-      </Box>
+    <Stack w="100%" h="300px">
+      <Mediaview media={media}>{hoverButtons(title)}</Mediaview>
       <CardInfo avatar={user.avatar} tag={user.tag} username={user.name} />
-    </div>
+    </Stack>
   )
 }
 
-const mediaview = media => {
+const Mediaview = ({ media, children }) => {
+  const videoRef = useRef(null)
+
   if (media[0].mimetype === 'video') {
     return (
-      <video
-        style={{ height: '230px', borderRadius: '8px', objectFit: 'cover' }}
-        muted
+      <Box
+        position="relative"
+        onMouseEnter={() => onMouseOver(videoRef)}
+        onMouseOut={() => onMouseOut(videoRef)}
       >
-        <source src={`${media[0]?.domain}${media[0]?.path}`} type="video/mp4" />
-      </video>
+        <video
+          ref={videoRef}
+          style={{ height: '230px', borderRadius: '8px', objectFit: 'cover' }}
+          muted
+        >
+          <source
+            src={`${media[0]?.domain}${media[0]?.path}`}
+            type="video/mp4"
+          />
+        </video>
+        {children}
+      </Box>
     )
   }
   return (
-    <Image
-      height="230px"
-      objectFit="cover"
-      borderRadius="8px"
-      src={`${media[0]?.domain}${media[0]?.path}`}
-    />
+    <Box position="relative">
+      <Image
+        height="230px"
+        objectFit="cover"
+        borderRadius="8px"
+        src={`${media[0]?.domain}${media[0]?.path}`}
+      />
+      {children}
+    </Box>
   )
+}
+
+function onMouseOver(ref) {
+  ref?.current.play()
+}
+function onMouseOut(ref) {
+  ref?.current.pause()
 }
 
 const hoverButtons = title => (

@@ -2,7 +2,7 @@ import { Button, Flex, Spacer } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import React from 'react'
 
-export default function ActionButtons() {
+export default function ActionButtons({ openModal }) {
   return (
     <Flex paddingInline="6" paddingBlockStart="6" position="sticky" top="0">
       <Link to="/shots">
@@ -23,13 +23,13 @@ export default function ActionButtons() {
           Save as draft
         </Button>
         <Button
-          type="submit"
           size="sm"
           paddingBlock="5"
           paddingInline="6"
           color="white"
           bg="pink.400"
           colorScheme="pink"
+          onClick={() => openModal(true)}
         >
           Continue
         </Button>

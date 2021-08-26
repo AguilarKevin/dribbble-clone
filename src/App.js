@@ -24,7 +24,7 @@ export default function App() {
       value={{
         api: {
           url: 'http://127.0.0.1:8000/api',
-          token: 'Bearer luSegdwd3bYbIyvy9kzPIZC7hGz7GXHYaZM6Mbc2',
+          token: 'Bearer 5S4HGdMZ75giz7nUBGt1pNrua2iaHxbFkUkNLLUK',
         },
       }}
     >
