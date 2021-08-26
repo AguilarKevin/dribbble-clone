@@ -8,7 +8,7 @@ function onMouseOver(e) {
   e.target.parentElement.querySelector('video').play()
 }
 function onMouseOut(e) {
-  e.target.parentElement.querySelector('video').pause()
+  // e.target.parentElement.querySelector('video').pause()
 }
 function isVideo(mimetype) {
   return mimetype === 'video'
