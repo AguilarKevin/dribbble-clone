@@ -1,8 +1,11 @@
 import { Button, Flex, Spacer } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import React from 'react'
+import { FormContext } from './ShotFormContext'
 
-export default function ActionButtons({ openModal }) {
+export default function ActionButtons() {
+  const { setModalOpen } = React.useContext(FormContext)
+
   return (
     <Flex paddingInline="6" paddingBlockStart="6" position="sticky" top="0">
       <Link to="/shots">
@@ -29,7 +32,9 @@ export default function ActionButtons({ openModal }) {
           color="white"
           bg="pink.400"
           colorScheme="pink"
-          onClick={() => openModal(true)}
+          onClick={() => {
+            setModalOpen(true)
+          }}
         >
           Continue
         </Button>

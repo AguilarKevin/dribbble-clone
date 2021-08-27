@@ -21,7 +21,6 @@ import {
 import React from 'react'
 import { useQuery } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
-import { AppContext } from '../../AppContextProvider'
 import { getShot } from '../../providers/PostsProvider'
 
 import HeartIcon from '../../assets/heart.svg'
@@ -33,9 +32,9 @@ import { format } from 'date-fns'
 
 export default function ViewShotModal({ shotId }) {
   const [open, setOpen] = React.useState(true)
-  const { api } = React.useContext(AppContext)
+
   const { isLoading, data } = useQuery(['get shot', shotId], () =>
-    getShot(api, shotId)
+    getShot(shotId)
   )
   const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()

@@ -27,16 +27,12 @@ export default function Content() {
   const { api } = React.useContext(AppContext)
   const [page, setPage] = React.useState(1)
   const [allPost, setAllPost] = React.useState([])
-  const { isLoading, data } = useQuery(
-    ['posts', page],
-    () => getImages(api, page),
-    {
-      keepPreviousData: true,
-      onSuccess: data => {
-        setAllPost([...allPost, ...data.data])
-      },
-    }
-  )
+  const { isLoading, data } = useQuery(['posts', page], () => getImages(page), {
+    keepPreviousData: true,
+    onSuccess: data => {
+      setAllPost([...allPost, ...data.data])
+    },
+  })
 
   return (
     <TabPanels>
