@@ -12,13 +12,14 @@ export default function Thumbs() {
         gridTemplateColumns="repeat(auto-fill, minmax(260px, 1fr))"
         gridColumnGap={4}
       >
-        {files?.slice(1, data.files?.length).map(file => (
+        {files?.slice(1, data.files?.length).map((file, i) => (
           <Image
             borderRadius="8px"
             objectFit="cover"
             w="104px"
             h="104px"
             src={file}
+            key={i}
           />
         ))}
       </Flex>

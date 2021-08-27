@@ -16,4 +16,20 @@ export async function getShotsByTag(tag) {
   return response.data
 }
 
-export async function createPost() {}
+export async function createPost(data) {
+  const shotFormData = new FormData()
+
+  shotFormData.append('title', data.title)
+  shotFormData.append('description', data.description)
+  shotFormData.append('tags', data.tags)
+  data.files.forEach(file => {
+    shotFormData.append('media[]', file)
+  })
+
+  return await ky.post(`${api.url}/uploads/new`, {
+    body: shotFormData,
+    headers: {
+      Authorization: api.token,
+    },
+  })
+}

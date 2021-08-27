@@ -3,16 +3,16 @@ import React from 'react'
 import ActionButtons from './ActionButtons'
 import TagsModal from './TagsModal'
 import ImagePicker from './ImagePicker/ImagePicker'
-import ky from 'ky'
 
 import { FormContext } from './ShotFormContext.js'
 import ShotForm from './ShotForm'
 import Thumbs from './Thumbs'
 export default function UploadImages() {
   const [isModalOpen, setModalOpen] = React.useState(false)
-  const [data, setData] = React.useState({})
+  const [data, setData] = React.useState({ tags: '' })
   const inputTitleRef = React.useRef(null)
   const inputDescRef = React.useRef(null)
+  const continueBtnRef = React.useRef(null)
 
   return (
     <React.Fragment>
@@ -22,14 +22,14 @@ export default function UploadImages() {
           isModalOpen,
           inputTitleRef,
           inputDescRef,
+          continueBtnRef,
           data,
           setData,
-          handleSubmit,
         }}
       >
         <ActionButtons />
+        {setEnableContinueBtn(continueBtnRef.current, data.files)}
         {!data.files && <ImagePicker />}
-        {console.log(data)}
         {data.files?.length > 0 && (
           <ShotForm>
             <Thumbs />
@@ -41,8 +41,8 @@ export default function UploadImages() {
   )
 }
 
-function handleSubmit(data) {
-  console.log(data)
-  const formData = new FormData()
-  formData.append('media', data.files)
+function setEnableContinueBtn(btn, condition) {
+  if (btn) {
+    btn.disabled = !condition
+  }
 }

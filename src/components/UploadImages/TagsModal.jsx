@@ -10,21 +10,35 @@ import {
   Text,
 } from '@chakra-ui/react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { FormContext } from './ShotFormContext'
+import { createPost } from '../../providers/PostsProvider'
 
-export default function TagsModal({ isOpen, onClose }) {
-  const {
-    isModalOpen,
-    setModalOpen,
-    inputTitleRef,
-    inputDescRef,
-    data,
-    setData,
-    handleSubmit,
-  } = React.useContext(FormContext)
+export default function TagsModal() {
+  const { isModalOpen, setModalOpen, data, setData } =
+    React.useContext(FormContext)
+  const inputRef = React.useRef()
 
-  const inputRef = React.useRef(null)
+  const navigate = useNavigate()
+
+  function handleSubmit() {
+    setData({ ...data, tags: inputRef.current.value })
+    console.log(data)
+
+    const formData = new FormData()
+    formData.append('title', data.title)
+    formData.append('description', data.description)
+    formData.append('tags', data.tags)
+    formData.append('media', data.files)
+
+    console.log(data)
+    createPost(data)
+      .then(() => {
+        navigate('/')
+      })
+      .catch(console.error)
+  }
   return (
     <Modal
       isOpen={isModalOpen}
@@ -56,19 +70,7 @@ export default function TagsModal({ isOpen, onClose }) {
             </Button>
             <Flex gridColumnGap="8px">
               <Button disabled>Save as a draft</Button>
-              <Button
-                onClick={() => {
-                  setData({
-                    title: inputTitleRef.current.value,
-                    description: inputDescRef.current.value,
-                    tags: inputRef.current.value,
-                    ...data,
-                  })
-                  handleSubmit(data)
-                  setModalOpen(!isModalOpen)
-                }}
-                colorScheme="pink"
-              >
+              <Button onClick={handleSubmit} colorScheme="pink">
                 Publish now
               </Button>
             </Flex>

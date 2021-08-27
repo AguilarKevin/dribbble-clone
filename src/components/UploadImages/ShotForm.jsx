@@ -7,7 +7,7 @@ export default function ShotForm({ children }) {
 
   return (
     <Flex
-      mt="45"
+      py="45"
       mx="auto"
       maxWidth="55%"
       direction="column"
@@ -27,6 +27,8 @@ export default function ShotForm({ children }) {
         px="0"
         variant="ghost"
         fontSize="2xl"
+        h="250px"
+        resize="none"
         placeholder="Write what went into this shot, and anything else you’d like to mention"
         ref={inputDescRef}
       />

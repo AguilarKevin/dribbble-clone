@@ -36,8 +36,7 @@ const bagIcon = (
 )
 
 export default function NavActions() {
-  const { api } = React.useContext(AppContext)
-  const { data } = useQuery(['posts', api], () => getUser(api))
+  const { data } = useQuery(['posts'], () => getUser())
 
   return (
     <Flex align="center">
