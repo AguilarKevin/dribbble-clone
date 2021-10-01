@@ -4,7 +4,7 @@ import { Flex, Link } from '@chakra-ui/layout'
 
 export default function Navigation({ links }) {
   return (
-    <Flex ml="8" align="center" gridColumnGap="7">
+    <Flex ml="8" align="center" gridColumnGap="8">
       {links.map(link => (
         <Link
           fontSize="sm"

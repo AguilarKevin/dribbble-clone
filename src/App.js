@@ -1,17 +1,16 @@
 import React from 'react'
 import { ChakraProvider, theme } from '@chakra-ui/react'
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
-
-import Navigation from './components/Navigation/Navigation.jsx'
-
-import Home from './components/Home/Home.jsx'
-
-import UploadImages from './components/UploadImages/UploadImages.jsx'
+import {
+  Routes,
+  Route,
+  //  useLocation,
+  Navigate,
+} from 'react-router-dom'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
-// import ViewShotModal from './components/ViewShotModal/ViewShotModal.jsx'
-// import Tags from './components/Tags/Tags.jsx'
 import Header from './components/header/Header'
+import ShotsPage from './pages/shots'
+import Page404 from './pages/404'
 
 export default function App() {
   const userQueryClient = new QueryClient()
@@ -22,9 +21,24 @@ export default function App() {
       <QueryClientProvider client={userQueryClient}>
         <Header />
       </QueryClientProvider>
-      {/* approutes */}
-      <QueryClientProvider client={postsQueryClient}></QueryClientProvider>
+
+      <QueryClientProvider client={postsQueryClient}>
+        <AppRouter />
+      </QueryClientProvider>
     </ChakraProvider>
+  )
+}
+
+const AppRouter = () => {
+  // let location = useLocation()
+  return (
+    <Routes>
+      <Route path="/">
+        <Navigate to="/shots" />
+        <Route path="/shots" element={<ShotsPage />}></Route>
+      </Route>
+      <Route path="*" element={<Page404 />} />
+    </Routes>
   )
 }
 
