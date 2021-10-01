@@ -1,11 +1,10 @@
 import { Button } from '@chakra-ui/button'
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Flex, Grid } from '@chakra-ui/layout'
+import { Flex } from '@chakra-ui/layout'
 import {
   Menu,
   MenuButton,
   MenuDivider,
-  MenuItem,
   MenuItemOption,
   MenuList,
   MenuOptionGroup,
