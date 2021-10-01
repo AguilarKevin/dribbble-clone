@@ -1,17 +1,21 @@
 import ky from 'ky'
-import api from './ApiProvider'
 
 export async function getImages(page) {
-  return await ky(`${api.url}/shots?page=${page}`).json()
+  return await ky(`${process.env.REACT_APP_API_URL}/shots?page=${page}`).json()
 }
 
 export async function getShot(id) {
-  const response = await ky(`${api.url}/shots/${id}`, {}).json()
+  const response = await ky(
+    `${process.env.REACT_APP_API_URL}/shots/${id}`,
+    {}
+  ).json()
   return response.data
 }
 
 export async function getShotsByTag(tag) {
-  const response = await ky(`${api.url}/tags/${tag}`).json()
+  const response = await ky(
+    `${process.env.REACT_APP_API_URL}/tags/${tag}`
+  ).json()
   console.log(response)
   return response.data
 }
@@ -26,10 +30,10 @@ export async function createPost(data) {
     shotFormData.append('media[]', file)
   })
 
-  return await ky.post(`${api.url}/uploads/new`, {
+  return await ky.post(`${process.env.REACT_APP_API_URL}/uploads/new`, {
     body: shotFormData,
     headers: {
-      Authorization: api.token,
+      Authorization: '',
     },
   })
 }

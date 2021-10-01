@@ -1,23 +1,12 @@
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
-} from '@chakra-ui/react';
-import React from 'react';
-
-const dropdownList = (
-  <MenuList textColor="gray.600" fontSize={12}>
-    <MenuItem>Following</MenuItem>
-    <MenuItem>Popular</MenuItem>
-
-    <MenuItem>New & Noteworthy</MenuItem>
-    <MenuDivider />
-    <MenuItem>Goods for sale</MenuItem>
-  </MenuList>
-);
+} from '@chakra-ui/react'
+import React from 'react'
 
 export default function Dropdown() {
   return (
@@ -36,7 +25,14 @@ export default function Dropdown() {
       >
         Popular <ChevronDownIcon marginInlineStart={4} />
       </MenuButton>
-      {dropdownList}
+      <MenuList textColor="gray.600" fontSize={12}>
+        <MenuItem>Following</MenuItem>
+        <MenuItem>Popular</MenuItem>
+
+        <MenuItem>New & Noteworthy</MenuItem>
+        <MenuDivider />
+        <MenuItem>Goods for sale</MenuItem>
+      </MenuList>
     </Menu>
-  );
+  )
 }

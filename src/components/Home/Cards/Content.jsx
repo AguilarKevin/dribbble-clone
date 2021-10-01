@@ -2,7 +2,6 @@ import React from 'react'
 import Cards from './Cards'
 import { Button, Flex, Spinner, TabPanel, TabPanels } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
-import { AppContext } from '../../../AppContextProvider'
 import { getImages } from '../../../providers/PostsProvider'
 
 const spinner = (
@@ -24,7 +23,6 @@ const loadMoreBtn = callback => (
 )
 
 export default function Content() {
-  const { api } = React.useContext(AppContext)
   const [page, setPage] = React.useState(1)
   const [allPost, setAllPost] = React.useState([])
   const { isLoading, data } = useQuery(['posts', page], () => getImages(page), {

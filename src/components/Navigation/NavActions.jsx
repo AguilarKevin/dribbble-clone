@@ -6,7 +6,6 @@ import bagSvg from '../../assets/bag.svg'
 import NavSearchInput from './NavSearchInput'
 
 import { useQuery } from 'react-query'
-import { AppContext } from '../../AppContextProvider'
 import { getUser } from '../../providers/UserProvider'
 
 const avatar = user => (
