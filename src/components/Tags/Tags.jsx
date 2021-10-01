@@ -2,15 +2,14 @@ import { Flex, Heading, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Content from './Content'
-import Header from './Header'
 
 import { useQuery } from 'react-query'
 import { AppContext } from '../../AppContextProvider'
 import { getShotsByTag } from '../../providers/PostsProvider'
 export default function Tags({ tag }) {
   const { api } = React.useContext(AppContext)
-  const [page, setPage] = React.useState(1)
-  const [allPost, setAllPost] = React.useState([])
+  // const [page, setPage] = React.useState(1)
+  // const [allPost, setAllPost] = React.useState([])
   const { isLoading, data } = useQuery(
     ['ShotsByTag', tag],
     () => getShotsByTag(api, tag)

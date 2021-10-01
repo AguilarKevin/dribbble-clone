@@ -1,10 +1,9 @@
 import ky from 'ky'
-import api from './ApiProvider'
 
 export async function getUser() {
-  const user = await ky(`${api.url}/user`, {
+  const user = await ky(`${process.env.API_URL}/user`, {
     headers: {
-      Authorization: api.token,
+      Authorization: '',
     },
   }).json()
 
