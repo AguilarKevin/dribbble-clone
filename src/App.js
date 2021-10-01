@@ -9,46 +9,50 @@ import Home from './components/Home/Home.jsx'
 import UploadImages from './components/UploadImages/UploadImages.jsx'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
-import ViewShotModal from './components/ViewShotModal/ViewShotModal.jsx'
-import Tags from './components/Tags/Tags.jsx'
+// import ViewShotModal from './components/ViewShotModal/ViewShotModal.jsx'
+// import Tags from './components/Tags/Tags.jsx'
+import Header from './components/header/Header'
 
 export default function App() {
   const userQueryClient = new QueryClient()
   const postsQueryClient = new QueryClient()
 
-  let location = useLocation()
-
   return (
     <ChakraProvider theme={theme}>
       <QueryClientProvider client={userQueryClient}>
-        <Navigation />
+        <Header />
       </QueryClientProvider>
-
-      <QueryClientProvider client={postsQueryClient}>
-        <Routes>
-          <Route exact path="/">
-            <Navigate to="/shots" />
-            <Route path="uploads/new" element={<UploadImages />} />
-            <Route path="/shots" element={<Home />}>
-              <Route
-                path="/:id"
-                element={
-                  <ViewShotModal
-                    shotId={location.pathname.replace('/shots/', '')}
-                  />
-                }
-              />
-            </Route>
-            <Route
-              path="/tags/:tag"
-              element={<Tags tag={location.pathname.replace('/tags/', '')} />}
-            />
-          </Route>
-        </Routes>
-      </QueryClientProvider>
+      {/* approutes */}
+      <QueryClientProvider client={postsQueryClient}></QueryClientProvider>
     </ChakraProvider>
   )
 }
+
+// const AppRouter = () => {
+//   let location = useLocation()
+//   return (
+//     <Routes>
+//       <Route exact path="/">
+//         <Navigate to="/shots" />
+//         <Route path="uploads/new" element={<UploadImages />} />
+//         <Route path="/shots" element={<Home />}>
+//           <Route
+//             path="/:id"
+//             element={
+//               <ViewShotModal
+//                 shotId={location.pathname.replace('/shots/', '')}
+//               />
+//             }
+//           />
+//         </Route>
+//         <Route
+//           path="/tags/:tag"
+//           element={<Tags tag={location.pathname.replace('/tags/', '')} />}
+//         />
+//       </Route>
+//     </Routes>
+//   )
+// }
 
 // async function getToken() {
 //   let token = localStorage.getItem('api_token')
