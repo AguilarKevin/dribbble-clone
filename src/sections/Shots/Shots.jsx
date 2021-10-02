@@ -1,12 +1,12 @@
-import { Button, ButtonGroup, IconButton } from '@chakra-ui/button'
+import { Button, IconButton } from '@chakra-ui/button'
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   HamburgerIcon,
 } from '@chakra-ui/icons'
-import { Box, Flex, Spacer, Text } from '@chakra-ui/layout'
-import { Hide, Show } from '@chakra-ui/media-query'
+import { Flex, Spacer, Text } from '@chakra-ui/layout'
+import { Hide } from '@chakra-ui/media-query'
 import { Icon } from '@chakra-ui/icon'
 import {
   Menu,
@@ -17,7 +17,7 @@ import {
   MenuOptionGroup,
 } from '@chakra-ui/menu'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Outlet } from 'react-router'
 
 const showByOptions = [
@@ -109,8 +109,8 @@ export default function Shots() {
                 d={scrollSide === 'right' ? 'block' : 'none'}
                 icon={<ChevronLeftIcon />}
                 onClick={() => {
-                  scrollLeft(tabsRef)
                   setScrollSide('left')
+                  scrollLeft(tabsRef)
                 }}
               />
             </Hide>
@@ -148,8 +148,8 @@ export default function Shots() {
                 d={scrollSide === 'left' ? 'block' : 'none'}
                 icon={<ChevronRightIcon />}
                 onClick={() => {
-                  scrollRight(tabsRef)
                   setScrollSide('right')
+                  scrollRight(tabsRef)
                 }}
               />
             </Hide>
@@ -174,7 +174,15 @@ export default function Shots() {
 }
 
 const scrollRight = function (containerRef) {
-  containerRef.current.scrollLeft += containerRef.current.offsetWidth
+  for (
+    let increment = 1;
+    increment <= containerRef.current.offsetWidth;
+    increment += 10
+  ) {
+    setTimeout(() => {
+      containerRef.current.scrollLeft += increment
+    }, 250)
+  }
 }
 const scrollLeft = function (containerRef) {
   containerRef.current.scrollLeft -= containerRef.current.offsetWidth
