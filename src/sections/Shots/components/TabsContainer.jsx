@@ -1,9 +1,9 @@
 import { IconButton } from '@chakra-ui/button'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Hide } from '@chakra-ui/media-query'
 import { Tab, TabList, Tabs } from '@chakra-ui/tabs'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 
 const tabTitles = [
   'All',
@@ -22,7 +22,12 @@ export default function TabsContainer({ children }) {
   const tabsRef = useRef(null)
   const leftButtonRef = useRef(null)
   const rightButtonRef = useRef(null)
-  useEffect(() => {}, [scrollPosition])
+  useLayoutEffect(() => {
+    const onLeft = scrollPosition === 'left'
+
+    leftButtonRef.current.style.filter = onLeft ? 'opacity(0)' : 'opacity(1)'
+    rightButtonRef.current.style.filter = onLeft ? 'opacity(1)' : 'opacity(0)'
+  }, [scrollPosition])
 
   return (
     <Box>
@@ -31,31 +36,33 @@ export default function TabsContainer({ children }) {
           <HStack
             pos="absolute"
             left="0"
+            zIndex="10"
             right="0"
             justify="space-between"
             w="full"
+            px="2"
           >
             <Hide above="md">
               <IconButton
                 variant="unstyled"
-                bg="transparent"
+                bgGradient="linear(to-r, #ffffff88, #ffffffaa)"
                 ref={leftButtonRef}
-                // d={scrollPosition === 'right' ? 'block' : 'none'}
                 icon={<ChevronLeftIcon />}
                 onClick={() => {
-                  setScrollPosition(scrollTo(tabsRef, 'left'))
+                  setScrollPosition('left')
+                  scrollTo(tabsRef, 'left')
                 }}
               />
             </Hide>
             <Hide above="md">
               <IconButton
-                bg="transparent"
+                bgGradient="linear(to-r, #ffffff88, #ffffffaa)"
                 variant="unstyled"
                 ref={rightButtonRef}
-                // d={scrollPosition === 'left' ? 'block' : 'none'}
                 icon={<ChevronRightIcon />}
                 onClick={() => {
-                  setScrollPosition(scrollTo(tabsRef, 'right'))
+                  setScrollPosition('right')
+                  scrollTo(tabsRef, 'right', setScrollPosition)
                 }}
               />
             </Hide>
@@ -67,11 +74,12 @@ export default function TabsContainer({ children }) {
             h="full"
             position="relative"
             py="2"
+            px="2"
             ref={tabsRef}
             overflowX="scroll"
             w="full"
             border="none"
-            __css={{ scrollBehavior: 'smooth' }}
+            __css={{ scrollBehavior: 'smooth', scrollbarWidth: 0 }}
           >
             {tabTitles.map((title, index) => (
               <Tab
@@ -108,8 +116,4 @@ const scrollTo = function (containerRef, to) {
     left: to === 'right' ? containerRef.current.scrollWidth : 0,
     behavior: 'smooth',
   })
-
-  return containerRef?.current.scrollLeft === containerRef.current.offsetWidth
-    ? 'right'
-    : 'left'
 }
