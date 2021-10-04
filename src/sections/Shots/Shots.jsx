@@ -5,8 +5,8 @@ import { Outlet } from 'react-router'
 import ShowByMenu from './components/ShowByMenu'
 import FilterButton from './components/FilterButton'
 import FiltersCollapseContainer from './components/FiltersCollapseContainer'
-import TabsContainer from './components/TabsContainer'
-import { TabPanel, TabPanels } from '@chakra-ui/tabs'
+import TabListContainer from './components/TabListContainer'
+import { TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 
 const showByOptions = [
   'Following',
@@ -22,29 +22,30 @@ export default function Shots() {
 
   return (
     <React.Fragment>
-      <Flex px="6" py="5" gridGap="4" flexWrap="wrap">
-        <ShowByMenu {...{ showBy, setShowBy, showByOptions }} />
-        <Hide above="md">
-          <Spacer />
-        </Hide>
-        <FilterButton {...{ isMenuOpen, setMenuOpen }} />
-        <Stack minW={{ base: 'full', md: 'auto' }}>
-          <FiltersCollapseContainer isMenuOpen={isMenuOpen} />
-          <TabsContainer>
-            <TabPanels>
-              <TabPanel>
-                <p>one!</p>
-              </TabPanel>
-              <TabPanel>
-                <p>two!</p>
-              </TabPanel>
-              <TabPanel>
-                <p>three!</p>
-              </TabPanel>
-            </TabPanels>
-          </TabsContainer>
-        </Stack>
-      </Flex>
+      <Tabs minW={{ base: 'full', md: 'auto' }} px="6">
+        <Flex py="5" gridGap="4" flexWrap="wrap" align="start">
+          <ShowByMenu {...{ showBy, setShowBy, showByOptions }} />
+          <Hide above="md">
+            <Spacer />
+          </Hide>
+          <FilterButton {...{ isMenuOpen, setMenuOpen }} />
+          <Stack minW={{ base: 'full', md: 'auto' }}>
+            <TabListContainer />
+            <FiltersCollapseContainer isMenuOpen={isMenuOpen} />
+          </Stack>
+        </Flex>
+        <TabPanels>
+          <TabPanel>
+            <p>one!</p>
+          </TabPanel>
+          <TabPanel>
+            <p>two!</p>
+          </TabPanel>
+          <TabPanel>
+            <p>three!</p>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
 
       <Outlet />
     </React.Fragment>
