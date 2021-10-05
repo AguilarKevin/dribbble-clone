@@ -19,7 +19,6 @@ export default function TabListScrollButtons({ container }) {
   useLayoutEffect(() => {
     const on = calcSegment(scrollState.currentPos, scrollState.maxPos)
 
-    console.log(`on: ${on}`)
     leftButtonRef.current.style.filter =
       on === 'left' ? 'opacity(0)' : 'opacity(1)'
     rightButtonRef.current.style.filter =
@@ -48,7 +47,6 @@ export default function TabListScrollButtons({ container }) {
             currentPos: newPos,
           })
 
-          console.log(container, scrollState)
           scrollTo(container, newPos)
         }}
       />
@@ -73,7 +71,6 @@ export default function TabListScrollButtons({ container }) {
             currentPos: newPos,
           })
 
-          console.log(container, scrollState)
           scrollTo(container, newPos)
         }}
       />
@@ -82,7 +79,6 @@ export default function TabListScrollButtons({ container }) {
 }
 
 const scrollTo = function (containerRef, to) {
-  console.log(`scroll to  ${to}`)
   containerRef.current.scrollTo({
     left: to,
     behavior: 'smooth',

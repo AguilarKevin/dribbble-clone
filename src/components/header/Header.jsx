@@ -23,7 +23,7 @@ export default function Header() {
       align="center"
       position="sticky"
       bg="white"
-      zIndex="10"
+      zIndex="20"
       top="0"
       paddingInline={{ base: '2', md: '0' }}
       borderBottomWidth="1px"
