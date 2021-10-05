@@ -1,11 +1,6 @@
 import React from 'react'
 import { ChakraProvider, theme } from '@chakra-ui/react'
-import {
-  Routes,
-  Route,
-  //  useLocation,
-  Navigate,
-} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import Header from './components/header/Header'
@@ -33,10 +28,7 @@ const AppRouter = () => {
   // let location = useLocation()
   return (
     <Routes>
-      <Route path="/">
-        <Navigate to="/shots" />
-        <Route path="/shots" element={<ShotsPage />}></Route>
-      </Route>
+      <Route path="/" element={<ShotsPage />}></Route>
       <Route path="*" element={<Page404 />} />
     </Routes>
   )

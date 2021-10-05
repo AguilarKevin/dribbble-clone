@@ -40,11 +40,12 @@ const NavMenu = ({ navOpen }) => (
     d={navOpen ? 'block' : 'none'}
     pos="absolute"
     top="60px"
+    w="full"
     h="calc(100vh - 60px)"
-    bottom="0"
     insetX="0"
     px="6"
     py="6"
+    zIndex="10"
   >
     <InputGroup>
       <InputLeftElement
