@@ -1,11 +1,7 @@
-import { Flex, Spacer, Stack } from '@chakra-ui/layout'
 import { Hide, Show } from '@chakra-ui/media-query'
 import React, { useState } from 'react'
 import { Outlet } from 'react-router'
-import ShowByMenu from './components/ShowByMenu'
-import FilterButton from './components/FilterButton'
-import FiltersCollapseContainer from './components/FiltersCollapseContainer'
-import TabListContainer from './components/TabListContainer'
+
 import { TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 import MobileToolbar from './components/MobileToolbar'
 import Toolbar from './components/Toolbar'

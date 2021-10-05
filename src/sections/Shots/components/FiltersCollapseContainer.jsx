@@ -1,7 +1,7 @@
 import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import { Image } from '@chakra-ui/image'
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/input'
-import { Flex, Spacer, Stack, Text } from '@chakra-ui/layout'
+import { Flex, Stack, Text } from '@chakra-ui/layout'
 import { Collapse } from '@chakra-ui/transition'
 import React from 'react'
 import ColorPalleteIcon from '../../../assets/color-pallete.svg'

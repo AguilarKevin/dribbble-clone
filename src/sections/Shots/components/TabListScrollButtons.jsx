@@ -1,6 +1,6 @@
 import { IconButton } from '@chakra-ui/button'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { HStack } from '@chakra-ui/layout'
+
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 export default function TabListScrollButtons({ container }) {

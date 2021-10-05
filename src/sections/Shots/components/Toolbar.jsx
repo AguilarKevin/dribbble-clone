@@ -14,11 +14,7 @@ export default function Toolbar({
 }) {
   return (
     <Stack px="4.5rem" pt="8">
-      <Flex
-        gridGap="4"
-        // align={{ base: 'strech', md: 'center' }}
-        justify={{ base: 'start', md: 'space-between' }}
-      >
+      <Flex gridGap="4" justify={{ base: 'start', md: 'space-between' }}>
         <ShowByMenu {...{ showBy, setShowBy, showByOptions }} />
 
         <FilterButton {...{ isMenuOpen, setMenuOpen }} />

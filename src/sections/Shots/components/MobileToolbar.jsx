@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Spacer, Stack } from '@chakra-ui/layout'
+import { Box, Divider, Flex, Spacer } from '@chakra-ui/layout'
 import { Hide } from '@chakra-ui/media-query'
 import React from 'react'
 import FilterButton from './FilterButton'
