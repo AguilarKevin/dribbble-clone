@@ -25,30 +25,29 @@ const scrollTo = function (containerRef, to) {
   })
 }
 
-// function calcSegment(current, max) {
-//   if (current === 0) {
-//     return 'left'
-//   } else if (current >= max) {
-//     return 'right'
-//   }
-//   return 'middle'
-// }
+function calcSegment(current, max) {
+  if (current === 0) {
+    return 'left'
+  } else if (current >= max) {
+    return 'right'
+  }
+  return 'middle'
+}
 
 function calcNewPos(direction, current, max) {
-  let increment = max / 3
+  let increment = max / 1.7
 
-  const newCurrent =
+  const newCurrent = Math.ceil(
     direction === 'toRight' ? current + increment : current - increment
-
-  return Number.parseInt(
-    direction === 'toRight'
-      ? newCurrent > max
-        ? max
-        : newCurrent
-      : newCurrent < 0
-      ? 0
-      : newCurrent
   )
+
+  return direction === 'toRight'
+    ? newCurrent > max
+      ? max
+      : newCurrent
+    : newCurrent < 0
+    ? 0
+    : newCurrent
 }
 
 function TabsScrollButtons({ container }) {
@@ -60,19 +59,19 @@ function TabsScrollButtons({ container }) {
   })
 
   useEffect(() => {
-    scrollState.maxPos = container.current?.scrollWidth
+    scrollState.maxPos = (container.current?.scrollWidth / 3) * 2
     return () => {}
   }, [scrollState, container])
 
-  // useLayoutEffect(() => {
-  //   const on = calcSegment(scrollState.currentPos, scrollState.maxPos)
+  useLayoutEffect(() => {
+    const on = calcSegment(scrollState.currentPos, scrollState.maxPos)
 
-  //   console.log(`on: ${on}`)
-  //   leftButtonRef.current.style.filter =
-  //     on === 'left' ? 'opacity(0)' : 'opacity(1)'
-  //   rightButtonRef.current.style.filter =
-  //     on === 'right' ? 'opacity(0)' : 'opacity(1)'
-  // }, [scrollState])
+    console.log(`on: ${on}`)
+    leftButtonRef.current.style.filter =
+      on === 'left' ? 'opacity(0)' : 'opacity(1)'
+    rightButtonRef.current.style.filter =
+      on === 'right' ? 'opacity(0)' : 'opacity(1)'
+  }, [scrollState.currentPos, scrollState.maxPos])
 
   return (
     <HStack
@@ -84,52 +83,49 @@ function TabsScrollButtons({ container }) {
       zIndex="5"
       justify="space-between"
     >
-      <Hide above="md">
-        <IconButton
-          ref={leftButtonRef}
-          bgGradient="linear(to-r, #ffffff88, #ffffffaa)"
-          variant="unstyled"
-          icon={<ChevronLeftIcon />}
-          onClick={() => {
-            const newPos = calcNewPos(
-              'toLeft',
-              scrollState.currentPos,
-              scrollState.maxPos
-            )
+      <IconButton
+        ref={leftButtonRef}
+        bgGradient="linear(to-r, #ffffff88, #ffffffaa)"
+        variant="unstyled"
+        icon={<ChevronLeftIcon />}
+        onClick={() => {
+          const newPos = calcNewPos(
+            'toLeft',
+            scrollState.currentPos,
+            scrollState.maxPos
+          )
 
-            setScrollState({
-              ...scrollState,
-              currentPos: newPos,
-            })
+          setScrollState({
+            ...scrollState,
+            currentPos: newPos,
+          })
 
-            console.log(container, scrollState)
-            scrollTo(container, newPos)
-          }}
-        />
-      </Hide>
-      <Hide above="md">
-        <IconButton
-          ref={rightButtonRef}
-          bgGradient="linear(to-l, #ffffff88, #ffffffaa)"
-          variant="unstyled"
-          icon={<ChevronRightIcon />}
-          onClick={() => {
-            const newPos = calcNewPos(
-              'toRight',
-              scrollState.currentPos,
-              scrollState.maxPos
-            )
+          console.log(container, scrollState)
+          scrollTo(container, newPos)
+        }}
+      />
 
-            setScrollState({
-              ...scrollState,
-              currentPos: newPos,
-            })
+      <IconButton
+        ref={rightButtonRef}
+        bgGradient="linear(to-l, #ffffff88, #ffffffaa)"
+        variant="unstyled"
+        icon={<ChevronRightIcon />}
+        onClick={() => {
+          const newPos = calcNewPos(
+            'toRight',
+            scrollState.currentPos,
+            scrollState.maxPos
+          )
 
-            console.log(container, scrollState)
-            scrollTo(container, newPos)
-          }}
-        />
-      </Hide>
+          setScrollState({
+            ...scrollState,
+            currentPos: newPos,
+          })
+
+          console.log(container, scrollState)
+          scrollTo(container, newPos)
+        }}
+      />
     </HStack>
   )
 }
@@ -139,7 +135,9 @@ export default function TabListContainer() {
 
   return (
     <Stack direction="row" w="full" postition="relative" align="center">
-      <TabsScrollButtons container={tabsRef} />
+      <Hide above="md">
+        <TabsScrollButtons container={tabsRef} />
+      </Hide>
       <TabList
         ref={tabsRef}
         w="full"
