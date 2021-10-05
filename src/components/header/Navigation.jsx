@@ -7,6 +7,7 @@ export default function Navigation({ links }) {
     <Flex ml="8" align="center" gridColumnGap="8">
       {links.map(link => (
         <Link
+          key={link}
           fontSize="sm"
           color="#566"
           fontWeight="semibold"
