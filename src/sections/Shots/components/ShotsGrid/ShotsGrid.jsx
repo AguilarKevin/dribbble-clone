@@ -7,13 +7,12 @@ import ShotCard from './ShotCard'
 
 export default function ShotsGrid() {
   const [posts, setPosts] = useState([])
-  const [page, setPage] = useState(1)
+  // const [page, setPage] = useState(1)
 
   useEffect(() => {
     getPosts().then(posts => setPosts(posts.data))
-  }, [page])
+  }, [])
 
-  console.log(posts)
   return (
     <Grid
       px={{ base: '2', md: '14' }}
