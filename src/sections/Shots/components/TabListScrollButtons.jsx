@@ -33,7 +33,7 @@ export default function TabListScrollButtons({ container }) {
       pos="absolute"
       left="0"
       right="0"
-      zIndex="5"
+      zIndex="3"
       justify="space-between"
     >
       <IconButton

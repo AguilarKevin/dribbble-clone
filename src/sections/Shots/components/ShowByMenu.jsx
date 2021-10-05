@@ -16,13 +16,13 @@ export default function ShowByMenu({ showByOptions, showBy, setShowBy }) {
       <MenuButton
         as={Button}
         px={3}
+        mx={{ base: '4', md: '0' }}
         py={2}
         variant="filled"
         fontSize={15}
         fontWeight="regular"
         textColor="gray.600"
-        transition="all 0.2s"
-        borderRadius="md"
+        borderRadius="lg"
         borderWidth="1px"
         _hover={{ bg: 'gray.200' }}
         _expanded={{ bg: 'white' }}
@@ -31,15 +31,15 @@ export default function ShowByMenu({ showByOptions, showBy, setShowBy }) {
         {showBy}
         <ChevronDownIcon marginInlineStart={4} />
       </MenuButton>
-      <MenuList textColor="gray.600" fontSize={12}>
+      <MenuList zIndex="5" textColor="gray.600" fontSize={12}>
         <MenuOptionGroup defaultValue={showBy} type="radio">
           {showByOptions.map((option, index) => (
-            <div key={option}>
+            <React.Fragment key={option}>
               {index === showByOptions.length - 1 && <MenuDivider />}
               <MenuItemOption onClick={() => setShowBy(option)} value={option}>
                 {option}
               </MenuItemOption>
-            </div>
+            </React.Fragment>
           ))}
         </MenuOptionGroup>
       </MenuList>

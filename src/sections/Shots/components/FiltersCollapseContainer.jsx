@@ -15,21 +15,16 @@ import UnsplashIcon from '../../../assets/unsplash.svg'
 import InvisionIcon from '../../../assets/invision.svg'
 import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/menu'
 import { Button } from '@chakra-ui/button'
-// const madeWithMenuItems = []
-// const downloadsMenuItems = []
-
-export default function StacksCollapseContainer({ isMenuOpen }) {
+export default function FiltersCollapseContainer({ isMenuOpen }) {
   return (
     <Collapse in={isMenuOpen} animateOpacity>
       <Flex flexDir={{ base: 'column', md: 'row' }} w="full" gridGap="8" py="4">
-        <Stack w="full">
+        <Stack flex={{ base: '0', md: '1' }}>
           <Text fontWeight="semibold" fontSize="sm">
             Tags
           </Text>
           <InputGroup w="full">
-            <InputLeftElement
-              children={<SearchIcon zIndex="-1" color="gray.500" />}
-            />
+            <InputLeftElement children={<SearchIcon color="gray.500" />} />
             <Input
               borderRadius="10px"
               bg="#eee"
@@ -41,7 +36,7 @@ export default function StacksCollapseContainer({ isMenuOpen }) {
           </InputGroup>
         </Stack>
 
-        <Stack>
+        <Stack flex={{ base: '0', md: '1' }}>
           <Text fontWeight="semibold" fontSize="sm">
             Color
           </Text>
@@ -63,7 +58,11 @@ export default function StacksCollapseContainer({ isMenuOpen }) {
           </InputGroup>
         </Stack>
 
-        <Stack title={'Made With'}>
+        <Stack flex={{ base: '0', md: '1' }}>
+          <Text fontWeight="semibold" fontSize="sm">
+            Made With
+          </Text>
+
           <Menu>
             <MenuButton
               variant="outline"
@@ -104,7 +103,10 @@ export default function StacksCollapseContainer({ isMenuOpen }) {
           </Menu>
         </Stack>
 
-        <Stack title={'Downloads'}>
+        <Stack flex={{ base: '0', md: '1' }}>
+          <Text fontWeight="semibold" fontSize="sm">
+            Downloads
+          </Text>
           <Menu>
             <MenuButton
               variant="outline"

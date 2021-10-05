@@ -20,17 +20,22 @@ export default function TabListContainer() {
   const tabsRef = useRef(null)
 
   return (
-    <Stack direction="row" w="full" postition="relative" align="center">
+    <Stack
+      direction="row"
+      w={{ base: 'full', md: 'max-content' }}
+      postition="relative"
+      align="center"
+    >
       <Hide above="md">
         <TabListScrollButtons container={tabsRef} />
       </Hide>
       <TabList
         ref={tabsRef}
-        w="full"
+        w={{ base: 'full', md: 'max-content' }}
         h="full"
         py="2"
         alignItems="center"
-        gridGap="1"
+        gridGap="2"
         overflowX="hidden"
         border="none"
       >

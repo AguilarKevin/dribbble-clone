@@ -6,6 +6,7 @@ export default function FilterButton({ isMenuOpen, setMenuOpen }) {
   return (
     <Button
       px={3}
+      mx={{ base: '4', md: '0' }}
       variant="outline"
       transition="all 0.2s"
       borderRadius="lg"

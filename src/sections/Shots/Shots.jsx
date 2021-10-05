@@ -1,5 +1,5 @@
 import { Flex, Spacer, Stack } from '@chakra-ui/layout'
-import { Hide } from '@chakra-ui/media-query'
+import { Hide, Show } from '@chakra-ui/media-query'
 import React, { useState } from 'react'
 import { Outlet } from 'react-router'
 import ShowByMenu from './components/ShowByMenu'
@@ -7,6 +7,8 @@ import FilterButton from './components/FilterButton'
 import FiltersCollapseContainer from './components/FiltersCollapseContainer'
 import TabListContainer from './components/TabListContainer'
 import { TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
+import MobileToolbar from './components/MobileToolbar'
+import Toolbar from './components/Toolbar'
 
 const showByOptions = [
   'Following',
@@ -22,27 +24,20 @@ export default function Shots() {
 
   return (
     <React.Fragment>
-      <Tabs minW={{ base: 'full', md: 'auto' }} px="6">
-        <Flex py="5" gridGap="4" flexWrap="wrap" align="start">
-          <ShowByMenu {...{ showBy, setShowBy, showByOptions }} />
-          <Hide above="md">
-            <Spacer />
-          </Hide>
-          <FilterButton {...{ isMenuOpen, setMenuOpen }} />
-          <Stack minW={{ base: 'full', md: 'auto' }}>
-            <TabListContainer />
-            <FiltersCollapseContainer isMenuOpen={isMenuOpen} />
-          </Stack>
-        </Flex>
+      <Tabs minW={{ base: 'full', md: 'auto' }}>
+        <Hide above="md">
+          <MobileToolbar
+            {...{ showByOptions, showBy, setShowBy, isMenuOpen, setMenuOpen }}
+          />
+        </Hide>
+        <Show above="md">
+          <Toolbar
+            {...{ showByOptions, showBy, setShowBy, isMenuOpen, setMenuOpen }}
+          />
+        </Show>
         <TabPanels>
           <TabPanel>
             <p>one!</p>
-          </TabPanel>
-          <TabPanel>
-            <p>two!</p>
-          </TabPanel>
-          <TabPanel>
-            <p>three!</p>
           </TabPanel>
         </TabPanels>
       </Tabs>

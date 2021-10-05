@@ -21,6 +21,10 @@ export default function Header() {
       h={{ base: '60px', md: '80px' }}
       justify={{ base: 'space-between', md: 'start' }}
       align="center"
+      position="sticky"
+      bg="white"
+      zIndex="10"
+      top="0"
       paddingInline={{ base: '2', md: '0' }}
       borderBottomWidth="1px"
       borderBottom="gray.100"
