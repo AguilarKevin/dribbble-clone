@@ -1,9 +1,9 @@
 import { IconButton } from '@chakra-ui/button'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { HStack, Stack, Text } from '@chakra-ui/layout'
 import { Hide } from '@chakra-ui/media-query'
-import { Tab, TabList, Tabs } from '@chakra-ui/tabs'
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import { Tab, TabList } from '@chakra-ui/tabs'
+import React, { useLayoutEffect, useEffect, useRef, useState } from 'react'
 
 const tabTitles = [
   'All',
@@ -17,21 +17,62 @@ const tabTitles = [
   'Web Design',
 ]
 
+const scrollTo = function (containerRef, to) {
+  console.log(`scroll to  ${to}`)
+  containerRef.current.scrollTo({
+    left: to,
+    behavior: 'smooth',
+  })
+}
+
+// function calcSegment(current, max) {
+//   if (current === 0) {
+//     return 'left'
+//   } else if (current >= max) {
+//     return 'right'
+//   }
+//   return 'middle'
+// }
+
+function calcNewPos(direction, current, max) {
+  let increment = max / 3
+
+  const newCurrent =
+    direction === 'toRight' ? current + increment : current - increment
+
+  return Number.parseInt(
+    direction === 'toRight'
+      ? newCurrent > max
+        ? max
+        : newCurrent
+      : newCurrent < 0
+      ? 0
+      : newCurrent
+  )
+}
+
 function TabsScrollButtons({ container }) {
   const leftButtonRef = useRef(null)
   const rightButtonRef = useRef(null)
-  const [scrollPosition, setScrollPosition] = useState({
-    current: 0,
-    max: container.scrollWidth,
+  const [scrollState, setScrollState] = useState({
+    currentPos: 0,
+    maxPos: container.current?.scrollWidth,
   })
 
-  useLayoutEffect(() => {
-    const onLeft = scrollPosition === 'left'
-    const onRight = scrollPosition === 'right'
+  useEffect(() => {
+    scrollState.maxPos = container.current?.scrollWidth
+    return () => {}
+  }, [scrollState, container])
 
-    leftButtonRef.current.style.filter = onLeft ? 'opacity(0)' : 'opacity(1)'
-    rightButtonRef.current.style.filter = onRight ? 'opacity(0)' : 'opacity(1)'
-  }, [scrollPosition])
+  // useLayoutEffect(() => {
+  //   const on = calcSegment(scrollState.currentPos, scrollState.maxPos)
+
+  //   console.log(`on: ${on}`)
+  //   leftButtonRef.current.style.filter =
+  //     on === 'left' ? 'opacity(0)' : 'opacity(1)'
+  //   rightButtonRef.current.style.filter =
+  //     on === 'right' ? 'opacity(0)' : 'opacity(1)'
+  // }, [scrollState])
 
   return (
     <HStack
@@ -50,7 +91,19 @@ function TabsScrollButtons({ container }) {
           variant="unstyled"
           icon={<ChevronLeftIcon />}
           onClick={() => {
-            scrollTo(container)
+            const newPos = calcNewPos(
+              'toLeft',
+              scrollState.currentPos,
+              scrollState.maxPos
+            )
+
+            setScrollState({
+              ...scrollState,
+              currentPos: newPos,
+            })
+
+            console.log(container, scrollState)
+            scrollTo(container, newPos)
           }}
         />
       </Hide>
@@ -61,7 +114,19 @@ function TabsScrollButtons({ container }) {
           variant="unstyled"
           icon={<ChevronRightIcon />}
           onClick={() => {
-            scrollTo(container)
+            const newPos = calcNewPos(
+              'toRight',
+              scrollState.currentPos,
+              scrollState.maxPos
+            )
+
+            setScrollState({
+              ...scrollState,
+              currentPos: newPos,
+            })
+
+            console.log(container, scrollState)
+            scrollTo(container, newPos)
           }}
         />
       </Hide>
@@ -69,7 +134,7 @@ function TabsScrollButtons({ container }) {
   )
 }
 
-export default function TabListContainer({ children }) {
+export default function TabListContainer() {
   const tabsRef = useRef(null)
 
   return (
@@ -106,11 +171,4 @@ export default function TabListContainer({ children }) {
       </TabList>
     </Stack>
   )
-}
-
-const scrollTo = function (containerRef, offsetLeft) {
-  containerRef.current.scrollTo({
-    left: offsetLeft,
-    behavior: 'smooth',
-  })
 }

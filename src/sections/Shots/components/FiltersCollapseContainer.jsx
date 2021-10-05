@@ -4,8 +4,8 @@ import { Flex, Stack, Text } from '@chakra-ui/layout'
 import { Collapse } from '@chakra-ui/transition'
 import React from 'react'
 
-const madeWithMenuItems = []
-const downloadsMenuItems = []
+// const madeWithMenuItems = []
+// const downloadsMenuItems = []
 
 export default function FiltersCollapseContainer({ isMenuOpen }) {
   return (

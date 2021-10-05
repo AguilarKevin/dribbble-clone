@@ -12,7 +12,7 @@ import React from 'react'
 
 export default function ShowByMenu({ showByOptions, showBy, setShowBy }) {
   return (
-    <Menu key="menu" closeOnSelect={true}>
+    <Menu closeOnSelect={true}>
       <MenuButton
         as={Button}
         px={3}
@@ -22,7 +22,6 @@ export default function ShowByMenu({ showByOptions, showBy, setShowBy }) {
         fontWeight="regular"
         textColor="gray.600"
         transition="all 0.2s"
-        key="menu-btn"
         borderRadius="md"
         borderWidth="1px"
         _hover={{ bg: 'gray.200' }}
@@ -32,21 +31,15 @@ export default function ShowByMenu({ showByOptions, showBy, setShowBy }) {
         {showBy}
         <ChevronDownIcon marginInlineStart={4} />
       </MenuButton>
-      <MenuList key="menu-list" textColor="gray.600" fontSize={12}>
-        <MenuOptionGroup defaultValue={showBy} type="radio" key="menu-group">
+      <MenuList textColor="gray.600" fontSize={12}>
+        <MenuOptionGroup defaultValue={showBy} type="radio">
           {showByOptions.map((option, index) => (
-            <>
-              {index === showByOptions.length - 1 && (
-                <MenuDivider key="separator" />
-              )}
-              <MenuItemOption
-                key={`option-${option}`}
-                onClick={() => setShowBy(option)}
-                value={option}
-              >
+            <div key={option}>
+              {index === showByOptions.length - 1 && <MenuDivider />}
+              <MenuItemOption onClick={() => setShowBy(option)} value={option}>
                 {option}
               </MenuItemOption>
-            </>
+            </div>
           ))}
         </MenuOptionGroup>
       </MenuList>
