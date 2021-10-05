@@ -3,8 +3,10 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router'
 
 import { TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
-import MobileToolbar from './components/MobileToolbar'
-import Toolbar from './components/Toolbar'
+import MobileToolbar from './components/Toolbar/MobileToolbar'
+import Toolbar from './components/Toolbar/Toolbar'
+
+import ShotsGrid from './components/ShotsGrid/ShotsGrid'
 
 const showByOptions = [
   'Following',
@@ -33,7 +35,7 @@ export default function Shots() {
         </Show>
         <TabPanels>
           <TabPanel>
-            <p>one!</p>
+            <ShotsGrid />
           </TabPanel>
         </TabPanels>
       </Tabs>
