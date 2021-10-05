@@ -1,7 +1,7 @@
 import { IconButton } from '@chakra-ui/button'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import { HStack } from '@chakra-ui/layout'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 export default function TabListScrollButtons({ container }) {
   const leftButtonRef = useRef(null)
@@ -27,19 +27,14 @@ export default function TabListScrollButtons({ container }) {
   }, [scrollState.currentPos, scrollState.maxPos])
 
   return (
-    <HStack
-      w="full"
-      px="2"
-      pos="absolute"
-      left="0"
-      right="0"
-      zIndex="3"
-      justify="space-between"
-    >
+    <>
       <IconButton
         ref={leftButtonRef}
         bgGradient="linear(to-r, #ffffff88, #ffffffaa)"
         variant="unstyled"
+        pos="absolute"
+        left="1"
+        zIndex="3"
         icon={<ChevronLeftIcon />}
         onClick={() => {
           const newPos = calcNewPos(
@@ -62,6 +57,9 @@ export default function TabListScrollButtons({ container }) {
         ref={rightButtonRef}
         bgGradient="linear(to-l, #ffffff88, #ffffffaa)"
         variant="unstyled"
+        pos="absolute"
+        right="1"
+        zIndex="3"
         icon={<ChevronRightIcon />}
         onClick={() => {
           const newPos = calcNewPos(
@@ -79,7 +77,7 @@ export default function TabListScrollButtons({ container }) {
           scrollTo(container, newPos)
         }}
       />
-    </HStack>
+    </>
   )
 }
 

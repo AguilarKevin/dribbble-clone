@@ -13,7 +13,7 @@ export default function Toolbar({
   setMenuOpen,
 }) {
   return (
-    <Stack px="12" pt="8">
+    <Stack px="4.5rem" pt="8">
       <Flex
         gridGap="4"
         // align={{ base: 'strech', md: 'center' }}

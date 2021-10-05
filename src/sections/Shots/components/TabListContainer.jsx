@@ -22,7 +22,7 @@ export default function TabListContainer() {
   return (
     <Stack
       direction="row"
-      w={{ base: 'full', md: 'max-content' }}
+      // w={{ base: 'full', md: 'max-content' }}
       postition="relative"
       align="center"
     >
@@ -32,25 +32,24 @@ export default function TabListContainer() {
       <TabList
         ref={tabsRef}
         w={{ base: 'full', md: 'max-content' }}
-        h="full"
-        py="2"
         alignItems="center"
-        gridGap="2"
-        overflowX="hidden"
+        gridGap="1"
+        overflow={{ base: 'hidden', md: 'visible' }}
         border="none"
       >
         {tabTitles.map((title, index) => (
           <Tab
             id={index}
             key={`tab-${title}`}
-            p="1"
-            fontSize="md"
+            px={{ base: '2', md: '3.5' }}
+            py="2"
+            fontSize={{ base: 'md', md: 'sm' }}
             textColor="gray.600"
             borderRadius="8px"
             _selected={{
               bg: 'gray.50',
               textColor: 'gray.800',
-              fontWeight: 'bold',
+              fontWeight: 'semibold',
             }}
             _hover={{ bg: 'gray.100' }}
           >

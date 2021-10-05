@@ -76,7 +76,7 @@ export default function FiltersCollapseContainer({ isMenuOpen }) {
             >
               All Apps
             </MenuButton>
-            <MenuList>
+            <MenuList zIndex="5" w="90vw">
               <MenuItem>All Apps</MenuItem>
               <MenuItem icon={<Image textColor="gray.600" src={AdobeXDIcon} />}>
                 Adobe XD
@@ -120,7 +120,7 @@ export default function FiltersCollapseContainer({ isMenuOpen }) {
             >
               All Shots
             </MenuButton>
-            <MenuList>
+            <MenuList zIndex="5" w="90vw">
               <MenuItem>All Shots</MenuItem>
               <MenuItem
                 icon={<Image textColor="gray.600" src={PhotoshopIcon} />}
