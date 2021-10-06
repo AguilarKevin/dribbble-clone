@@ -18,7 +18,6 @@ export default function MobileToolbar({
       py="4"
       gridGap="4"
       flexWrap="wrap"
-      // align={{ base: 'strech', md: 'center' }}
       justify={{ base: 'start', md: 'space-between' }}
     >
       <ShowByMenu {...{ showBy, setShowBy, showByOptions }} />

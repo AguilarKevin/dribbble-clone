@@ -1,19 +1,18 @@
 import React from 'react'
-import { Stack } from '@chakra-ui/react'
-
 import SaveIcon from '../../../../assets/save-folder.svg'
 import HeartIcon from '../../../../assets/heart.svg'
 import { ViewIcon } from '@chakra-ui/icons'
-import { Flex, Text, Spacer, Box, Badge } from '@chakra-ui/layout'
+import { Flex, Text, Box, Badge } from '@chakra-ui/layout'
 import { IconButton, Button } from '@chakra-ui/button'
 import { Image } from '@chakra-ui/image'
 import { Avatar } from '@chakra-ui/avatar'
 
-export default function ShotCard({ id, title, media, likes, views, user }) {
+export default function ShotCard({ title, media, likes, views, user }) {
   return (
-    <Stack w="100%">
+    <Flex flexDir="column" w="100%" gridGap="14px">
       <Mediaview media={media}>
         <Flex
+          h="full"
           position="absolute"
           align="flex-end"
           inset="0"
@@ -45,11 +44,11 @@ export default function ShotCard({ id, title, media, likes, views, user }) {
           />
         </Flex>
       </Mediaview>
-      <Flex>
+      <Flex h="34px">
         <Flex align="center">
-          <Avatar size="xs" name="test" mr="4" src={user.Avatar} />
-          <Text mr="1.5" fontSize="xs" fontWeight="bold">
-            {user.username}
+          <Avatar size="xs" name="test" mr="1.5" src={user.Avatar} />
+          <Text mr="1.5" noOfLines="1" fontSize="xs" fontWeight="bold">
+            {user.name}
           </Text>
           <Badge
             variant="subtle"
@@ -60,7 +59,7 @@ export default function ShotCard({ id, title, media, likes, views, user }) {
             {user.tag}
           </Badge>
         </Flex>
-        <Spacer />
+
         <Flex align="center">
           <Button
             size="xs"
@@ -82,7 +81,7 @@ export default function ShotCard({ id, title, media, likes, views, user }) {
           </Button>
         </Flex>
       </Flex>
-    </Stack>
+    </Flex>
   )
 }
 
@@ -93,6 +92,7 @@ function Mediaview({ media, children }) {
     return (
       <Box
         position="relative"
+        flex="1"
         onMouseEnter={() => onMouseOver(videoRef)}
         onMouseOut={() => onMouseOut(videoRef)}
       >
@@ -100,9 +100,10 @@ function Mediaview({ media, children }) {
           ref={videoRef}
           style={{
             w: 'full',
-            h: { base: '300px', md: '300px' },
+            h: 'full',
+            position: { base: 'static', md: 'absolute' },
+            bottom: '0',
             borderRadius: '8px',
-            objectFit: 'cover',
           }}
           muted
         >
@@ -116,10 +117,10 @@ function Mediaview({ media, children }) {
     )
   }
   return (
-    <Box position="relative">
+    <Box position="relative" flex="1">
       <Image
         w="full"
-        h={{ base: '300px', md: '230px' }}
+        h="full"
         objectFit="cover"
         borderRadius="8px"
         src={`${media[0]?.domain}${media[0]?.path}`}

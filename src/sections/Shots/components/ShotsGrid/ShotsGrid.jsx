@@ -7,7 +7,6 @@ import ShotCard from './ShotCard'
 
 export default function ShotsGrid() {
   const [posts, setPosts] = useState([])
-  // const [page, setPage] = useState(1)
 
   useEffect(() => {
     getPosts().then(posts => setPosts(posts.data))
@@ -17,7 +16,7 @@ export default function ShotsGrid() {
     <Grid
       px={{ base: '2', md: '14' }}
       gridTemplateColumns="repeat(auto-fill, minmax(260px, 1fr))"
-      gap={10}
+      gridGap={8}
     >
       {posts.map(post => (
         <React.Fragment key={post.id}>
