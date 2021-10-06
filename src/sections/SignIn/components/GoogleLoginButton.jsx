@@ -10,12 +10,8 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 export default function GoogleLoginButton() {
   const { signIn } = useGoogleLogin({
-    onSuccess: res => {
-      console.log(res.profileObj)
-    },
-    onFailure: res => {
-      console.log(res)
-    },
+    onSuccess: res => {},
+    onFailure: res => {},
     accessType: 'online',
     clientId,
   })
