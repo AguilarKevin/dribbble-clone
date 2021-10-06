@@ -1,17 +1,15 @@
 import React from 'react'
-import { Stack } from '@chakra-ui/react'
-
 import SaveIcon from '../../../../assets/save-folder.svg'
 import HeartIcon from '../../../../assets/heart.svg'
 import { ViewIcon } from '@chakra-ui/icons'
-import { Flex, Text, Spacer, Box, Badge } from '@chakra-ui/layout'
+import { Flex, Text, Box, Badge } from '@chakra-ui/layout'
 import { IconButton, Button } from '@chakra-ui/button'
 import { Image } from '@chakra-ui/image'
 import { Avatar } from '@chakra-ui/avatar'
 
 export default function ShotCard({ title, media, likes, views, user }) {
   return (
-    <Flex flexDir="column" w="100%" h="full" gridGap="14px">
+    <Flex flexDir="column" w="100%" gridGap="14px">
       <Mediaview media={media}>
         <Flex
           h="full"
@@ -103,9 +101,8 @@ function Mediaview({ media, children }) {
           style={{
             w: 'full',
             h: 'full',
-            position: 'absolute',
+            position: { base: 'static', md: 'absolute' },
             bottom: '0',
-
             borderRadius: '8px',
           }}
           muted
