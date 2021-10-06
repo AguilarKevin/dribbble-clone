@@ -12,12 +12,14 @@ export default function ShotsGrid() {
   useEffect(() => {
     getPosts().then(posts => setPosts(posts.data))
   }, [])
+  console.log(posts)
 
   return (
     <Grid
       px={{ base: '2', md: '14' }}
       gridTemplateColumns="repeat(auto-fill, minmax(260px, 1fr))"
-      gap={10}
+      gridTemplateRows={{ base: '290px', md: 'auto' }}
+      gap={8}
     >
       {posts.map(post => (
         <React.Fragment key={post.id}>

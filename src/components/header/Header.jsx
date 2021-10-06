@@ -21,7 +21,7 @@ export default function Header() {
       h={{ base: '60px', md: '80px' }}
       justify={{ base: 'space-between', md: 'start' }}
       align="center"
-      position="sticky"
+      position={{ base: 'sticky', md: 'static' }}
       bg="white"
       zIndex="20"
       top="0"
