@@ -3,8 +3,10 @@ import { Flex } from '@chakra-ui/layout'
 
 import { Show } from '@chakra-ui/media-query'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function UserActionButtons() {
+  const navigate = useNavigate()
   return (
     <Flex flex={{ base: '0', md: '1' }} justify="end" align="center">
       <Button
@@ -13,6 +15,9 @@ export default function UserActionButtons() {
         fontSize="md"
         color="#8E8E97"
         variant="ghost"
+        onClick={() => {
+          navigate('/session/new')
+        }}
       >
         Sign in
       </Button>
