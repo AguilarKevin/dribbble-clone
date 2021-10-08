@@ -4,7 +4,7 @@ async function fetchGraphQL(text, variables) {
   const response = await fetch(API_URL, {
     method: 'POST',
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': 'true',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
