@@ -13,6 +13,8 @@
     "date-fns": "^2.23.0",
     "dotenv": "^10.0.0",
     "framer-motion": "^4.0.0",
+    "graphql": "^15.6.1",
+    "graphql-relay": "^0.9.0",
     "history": "5",
     "ky": "^0.28.5",
     "react": "^17.0.2",
@@ -21,6 +23,7 @@
     "react-google-login": "^5.2.2",
     "react-icons": "^3.0.0",
     "react-query": "3",
+    "react-relay": "^12.0.0",
     "react-router-dom": "^6.0.0-beta.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^0.2.2"
@@ -29,6 +32,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql --extensions js jsx",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,5 +49,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "relay-compiler": "^12.0.0",
+    "relay-config": "^12.0.0"
   }
 }
