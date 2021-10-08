@@ -6,9 +6,22 @@ import fetchGraphQL from '../../../../FetchGraphQL.js'
 import ShotCard from './ShotCard'
 
 const ShotsQuery = `
-  query Shots {
-    title
-    description
+  query Shots{
+    shots{
+      id
+      title
+      description
+      media {
+        domain
+        path
+        mimetype
+      }
+      user {
+        name
+        avatar
+        tag
+      }
+    }
   }
 `
 
@@ -17,7 +30,9 @@ export default function ShotsGrid() {
 
   useEffect(() => {
     fetchGraphQL(ShotsQuery)
-      .then(posts => setPosts(posts))
+      .then(response => {
+        setPosts(response.data.shots)
+      })
       .catch(error => {
         console.error(error)
       })
@@ -39,7 +54,3 @@ export default function ShotsGrid() {
     </Suspense>
   )
 }
-
-// async function getPosts() {
-//   return await ky(`${process.env.REACT_APP_API_URL}/shots?page=${1}`).json()
-// }
