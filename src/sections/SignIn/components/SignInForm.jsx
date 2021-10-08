@@ -77,11 +77,7 @@ export default function SignInForm() {
                   Forgot password?
                 </Text>
               </Flex>
-              <Input
-                // onChange={handleChange}
-                variant="filled"
-                borderRadius="lg"
-              />
+              <Input variant="filled" borderRadius="lg" />
             </Stack>
             <Button
               bg="pink.500"
@@ -94,7 +90,7 @@ export default function SignInForm() {
             </Button>
           </Flex>
         </Flex>
-
+        `
         <Flex fontSize="14px" justify="center" gridGap="4px">
           <Text>Not a member?</Text>
           <Text fontWeight="regular" color="purple.700">
