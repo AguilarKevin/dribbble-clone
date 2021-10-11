@@ -8,8 +8,10 @@ import {
 import { SearchIcon } from '@chakra-ui/icons'
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/input'
 import { Box, Stack, Text } from '@chakra-ui/layout'
+import { FocusLock } from '@chakra-ui/focus-lock'
 import { Link } from 'react-router-dom'
 import React from 'react'
+import { Flex } from '@chakra-ui/react'
 
 const navMenuItems = [
   {
@@ -58,68 +60,73 @@ export default function NavigationMenu({ navOpen }) {
       py="6"
       zIndex="10"
     >
-      <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="gray.400" />}
-        />
-        <Input
-          bg="#eee"
-          borderRadius="lg"
-          _focus={{
-            borderColor: 'pink.300',
-            borderWidth: '1px',
-            bg: 'transparent',
-            boxShadow: '0px 0px 1px 3px #FFE8E8',
-          }}
-          variant="filled"
-          type="text"
-          placeholder="Search"
-        />
-      </InputGroup>
+      <Flex flexDir="column" gridGap="4">
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.400" />}
+          />
+          <Input
+            bg="#eee"
+            borderRadius="lg"
+            _focus={{
+              borderColor: 'pink.300',
+              borderWidth: '1px',
+              bg: 'transparent',
+              boxShadow: '0px 0px 1px 3px #FFE8E8',
+            }}
+            variant="filled"
+            type="text"
+            placeholder="Search"
+          />
+        </InputGroup>
 
-      <Accordion allowMultiple>
-        {navMenuItems.map(item =>
-          item.options ? (
-            <AccordionItem border="none">
-              <h2>
-                <AccordionButton px="0" py="3" _focus={{ boxShadow: 'none' }}>
-                  <Text
-                    color="gray.600"
-                    flex="1"
-                    fontSize="18px"
-                    fontWeight="semibold"
-                    textAlign="left"
+        <Accordion allowMultiple>
+          {navMenuItems.map(item =>
+            item.options ? (
+              <AccordionItem border="none" key={item.title}>
+                <h2>
+                  <AccordionButton
+                    px="0"
+                    py="3"
+                    _focus={{ boxShadow: 'none' }}
+                    _hover={{ bg: 'none' }}
                   >
-                    {item.title}
-                  </Text>
-                  <AccordionIcon />
-                </AccordionButton>
-              </h2>
-              <AccordionPanel
-                d="flex"
-                flexDir="column"
-                gridGap="20px"
-                px="0"
-                py="4px"
-                borderLeft="1px"
-                borderColor="gray.200"
-              >
-                {item.options?.map(option => (
-                  <Link to={`/${option}`}>
-                    <Text px="8" py="3" color="gray.500" fontSize="md">
-                      {option}
+                    <Text
+                      color="gray.500"
+                      flex="1"
+                      fontSize="18px"
+                      fontWeight="semibold"
+                      textAlign="left"
+                    >
+                      {item.title}
                     </Text>
-                  </Link>
-                ))}
-              </AccordionPanel>
-            </AccordionItem>
-          ) : (
-            <>
-              <Link to={`/${item.title}`}>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel px="0" py="8px">
+                  <Flex
+                    flexDir="column"
+                    gridGap="4px"
+                    justify="space-between"
+                    borderLeft="1px"
+                    borderColor="gray.200"
+                  >
+                    {item.options?.map(option => (
+                      <Link to={`/${option}`} key={option}>
+                        <Text px="8" py="10px" color="gray.500" fontSize="md">
+                          {option}
+                        </Text>
+                      </Link>
+                    ))}
+                  </Flex>
+                </AccordionPanel>
+              </AccordionItem>
+            ) : (
+              <Link to={`/${item.title}`} key={item.title}>
                 <Box>
                   <Text
-                    color="gray.600"
+                    color="gray.500"
                     flex="1"
                     fontSize="18px"
                     fontWeight="semibold"
@@ -131,10 +138,10 @@ export default function NavigationMenu({ navOpen }) {
                   </Text>
                 </Box>
               </Link>
-            </>
-          )
-        )}
-      </Accordion>
+            )
+          )}
+        </Accordion>
+      </Flex>
     </Stack>
   )
 }

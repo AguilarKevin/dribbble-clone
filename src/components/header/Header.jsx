@@ -17,6 +17,7 @@ export default function Header() {
       bg="white"
       zIndex="20"
       top="0"
+      insetX="0"
       paddingInline={{ base: '2', md: '0' }}
       borderBottomWidth="1px"
       borderBottom="gray.100"
