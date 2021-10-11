@@ -3,17 +3,9 @@ import { Flex } from '@chakra-ui/react'
 import { Hide, Show } from '@chakra-ui/media-query'
 
 import AppLogo from './AppLogo'
-import MobileNavigation from './MobileNavigation'
+import MobileNavigation from './MobileNavigation/MobileNavigation'
 import Navigation from './Navigation'
 import UserActionButtons from './UserActionButtons'
-
-const navlinks = [
-  'Inspiration',
-  'Find Work',
-  'Learn Design',
-  'Go Pro',
-  'Hire Designers',
-]
 
 export default function Header() {
   return (
@@ -25,16 +17,17 @@ export default function Header() {
       bg="white"
       zIndex="20"
       top="0"
+      insetX="0"
       paddingInline={{ base: '2', md: '0' }}
       borderBottomWidth="1px"
       borderBottom="gray.100"
     >
       <Hide above="md">
-        <MobileNavigation links={navlinks} />
+        <MobileNavigation />
       </Hide>
       <AppLogo />
       <Show above="md">
-        <Navigation links={navlinks} />
+        <Navigation />
       </Show>
       <UserActionButtons />
     </Flex>
