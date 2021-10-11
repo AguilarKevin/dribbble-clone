@@ -1,6 +1,5 @@
 async function fetchGraphQL(text, variables) {
-  const API_URL =
-    'http://localhost:8000/graphql' /* process.env.REACT_APP_API_GRAPHQL_URL */
+  const API_URL = process.env.REACT_APP_API_GRAPHQL_URL
 
   const response = await fetch(API_URL, {
     method: 'POST',

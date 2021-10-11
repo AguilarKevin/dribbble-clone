@@ -1,8 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Flex, Link } from '@chakra-ui/layout'
 
-export default function Navigation({ links }) {
+const links = [
+  'Inspiration',
+  'Find Work',
+  'Learn Design',
+  'Go Pro',
+  'Hire Designers',
+]
+
+export default function Navigation() {
   return (
     <Flex ml="8" align="center" gridColumnGap="8">
       {links.map(link => (
@@ -20,8 +27,4 @@ export default function Navigation({ links }) {
       ))}
     </Flex>
   )
-}
-
-Navigation.propTypes = {
-  links: PropTypes.array,
 }
