@@ -8,7 +8,6 @@ import {
 import { SearchIcon } from '@chakra-ui/icons'
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/input'
 import { Box, Stack, Text } from '@chakra-ui/layout'
-import { FocusLock } from '@chakra-ui/focus-lock'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import { Flex } from '@chakra-ui/react'
