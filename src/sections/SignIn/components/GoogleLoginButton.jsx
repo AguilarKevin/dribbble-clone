@@ -1,6 +1,7 @@
 import { Button } from '@chakra-ui/button'
 import { Image } from '@chakra-ui/image'
 import { Flex, Text } from '@chakra-ui/layout'
+
 import React from 'react'
 import { useGoogleLogin } from 'react-google-login'
 
@@ -10,8 +11,8 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 export default function GoogleLoginButton() {
   const { signIn } = useGoogleLogin({
-    onSuccess: res => {},
-    onFailure: res => {},
+    onSuccess: res => console.log(res),
+    onFailure: res => console.log(res),
     accessType: 'online',
     clientId,
   })
