@@ -6,10 +6,11 @@ import { Flex, Text, Box, Badge } from '@chakra-ui/layout'
 import { IconButton, Button } from '@chakra-ui/button'
 import { Image } from '@chakra-ui/image'
 import { Avatar } from '@chakra-ui/avatar'
+import { Link } from 'react-router-dom'
 
-export default function ShotCard({ title, media, likes, views, user }) {
+export default function ShotCard({ id, title, media, likes, views, user }) {
   return (
-    <Flex flexDir="column" w="100%" gridGap="14px">
+    <Link to={`/shots/${id}`} d="flex" flexDir="column" w="100%" gridGap="14px">
       <Mediaview media={media}>
         <Flex
           h="full"
@@ -81,7 +82,7 @@ export default function ShotCard({ title, media, likes, views, user }) {
           </Button>
         </Flex>
       </Flex>
-    </Flex>
+    </Link>
   )
 }
 
