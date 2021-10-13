@@ -11,11 +11,10 @@ export default function App() {
   return (
     <ChakraProvider theme={theme}>
       <Routes>
-        <Routes>
-          <Route path="/" element={<ShotsPage />}>
-            <Route path="/shots/:id" element={<Shot />} />
-          </Route>
-        </Routes>
+        <Route path="/" element={<ShotsPage />}>
+          <Route path="/shots/:id" element={<Shot />} />
+        </Route>
+
         <Route path="/session/new" element={<SignInPage />} />
         <Route path="*" element={<Page404 />} />
       </Routes>

@@ -37,7 +37,7 @@ export default function ViewShotModal({ shotId }) {
     getShot(shotId)
   )
   const navigate = useNavigate()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpenModalInfo, onOpenModalInfo, onCloseModalInfo } = useDisclosure()
 
   return (
     <Modal
@@ -57,7 +57,7 @@ export default function ViewShotModal({ shotId }) {
         <ModalBody bg="white" borderTopLeftRadius="14px">
           {isLoading && spinner}
           {data && content(data)}
-          {data && floatinButtons(data, onOpen)}
+          {data && floatinButtons(data, onOpenModalInfo)}
           {data && modalInfo(isOpen, onClose, data)}
         </ModalBody>
       </ModalContent>
