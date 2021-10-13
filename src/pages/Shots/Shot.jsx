@@ -41,6 +41,7 @@ export default function Shot() {
   const navigate = useNavigate()
 
   const [data, setData] = useState(null)
+  const [currentMedia, setCurrentMedia] = useState(0)
 
   useEffect(() => {
     fetchGraphQL(`
@@ -78,7 +79,6 @@ export default function Shot() {
 
   const { isOpenModalInfo, onOpenModalInfo, onCloseModalInfo } = useDisclosure()
 
-  console.log(data?.media[0])
   return (
     <Modal
       onClose={() => {
@@ -165,8 +165,53 @@ export default function Shot() {
             />
           </Flex>
           <Box w="full">
-            <Mediaview media={data?.media[0]} />
+            <Mediaview media={data?.media[currentMedia]} />
           </Box>
+          <Flex w="full" py="8" justify="center" gridGap="4" px="4">
+            {data?.media.map((media, index) => {
+              return index === currentMedia ? (
+                <Box
+                  flex="1"
+                  borderRadius="md"
+                  overflow="hidden"
+                  position="relative"
+                  __css={{
+                    boxShadow: '0px 0px 1px 3px #ff61bd',
+                  }}
+                >
+                  <Box w="full" h="full" position="relative">
+                    <Mediaview media={media} />
+                  </Box>
+                  <Box
+                    position="absolute"
+                    inset="0"
+                    zIndex="10"
+                    onClick={() => setCurrentMedia(index)}
+                  />
+                </Box>
+              ) : (
+                <Box
+                  flex="1"
+                  borderRadius="md"
+                  overflow="hidden"
+                  position="relative"
+                >
+                  <Box w="full" h="full" position="relative">
+                    <Mediaview media={media} />
+                  </Box>
+                  <Box
+                    position="absolute"
+                    top="0"
+                    bottom="0"
+                    left="0"
+                    right="0"
+                    zIndex="15"
+                    onClick={() => setCurrentMedia(index)}
+                  />
+                </Box>
+              )
+            })}
+          </Flex>
           <Box px="4" py="8">
             <Text lineHeight="1.8">{data?.description}</Text>
           </Box>
