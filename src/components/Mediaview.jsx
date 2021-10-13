@@ -8,6 +8,7 @@ export default function Mediaview({ media }) {
         style={{
           w: 'full',
           h: 'full',
+          objectFit: 'cover',
         }}
         muted
         autoPlay

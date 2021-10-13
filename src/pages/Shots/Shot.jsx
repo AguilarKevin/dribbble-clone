@@ -17,6 +17,7 @@ import {
   Stack,
   Text,
   useDisclosure,
+  Center,
 } from '@chakra-ui/react'
 
 import { Link } from 'react-router-dom'
@@ -32,6 +33,7 @@ import { useLocation, useNavigate } from 'react-router'
 
 import fetchGraphQL from '../../FetchGraphQL.js'
 import Mediaview from '../../components/Mediaview'
+import { EmailIcon } from '@chakra-ui/icons'
 
 export default function Shot() {
   const location = useLocation()
@@ -74,7 +76,7 @@ export default function Shot() {
       })
   }, [location.pathname])
 
-  // const { isOpenModalInfo, onOpenModalInfo, onCloseModalInfo } = useDisclosure()
+  const { isOpenModalInfo, onOpenModalInfo, onCloseModalInfo } = useDisclosure()
 
   console.log(data?.media[0])
   return (
@@ -94,17 +96,92 @@ export default function Shot() {
         borderRadius="0px"
       >
         <ModalCloseButton color={{ md: 'white' }} right="2px" top="2px" />
-        <ModalHeader pb="20px"></ModalHeader>
-        <ModalBody px="0" bg="white" borderTopLeftRadius={{ md: '14px' }}>
-          <Box px="6">
-            <Heading fontSize={20}>{data?.title}</Heading>
-            <Flex>
-              <Avatar src={data?.user.avatar} name={data?.user.name} />
+        <ModalBody
+          px="0"
+          py="8"
+          bg="white"
+          borderTopLeftRadius={{ md: '14px' }}
+        >
+          <Flex px="4" flexDir="column" gridGap="4">
+            <Text as="h3" fontWeight="560" w="full" fontSize={22}>
+              {data?.title}
+            </Text>
+            <Flex gridGap="4" align="center" letterSpacing="tight">
+              <Avatar
+                size="md"
+                src={data?.user.avatar}
+                name={data?.user.name}
+              />
+              <Stack flex="1">
+                <Text>{data?.user.name}</Text>
+                <Flex align="center" gridGap="4px" fontSize="14px">
+                  <Text>Follow</Text>
+                  <Text as="span">•</Text>
+                  <Text color="pink.500">Hire Us</Text>
+                </Flex>
+              </Stack>
             </Flex>
-          </Box>
-          <Box w="full" h="240px">
+          </Flex>
+
+          <Flex px="4" py="4" justify="space-between" gridGap="2">
+            <IconButton
+              variant="outline"
+              width="40px"
+              height="40px"
+              marginBlockEnd="14px"
+              icon={<Image width="18px" height="18px" src={SaveIcon} />}
+            />
+            <IconButton
+              variant="outline"
+              width="40px"
+              height="40px"
+              marginBlockEnd="14px"
+              icon={<Image width="18px" height="18px" src={HeartIcon} />}
+            />
+            <Spacer />
+            <IconButton
+              variant="outline"
+              width="40px"
+              height="40px"
+              marginBlockEnd="14px"
+              icon={<Image width="18px" height="18px" src={MessageIcon} />}
+            />
+
+            <IconButton
+              variant="outline"
+              width="40px"
+              height="40px"
+              marginBlockEnd="14px"
+              icon={<Image width="18px" height="18px" src={ShareIcon} />}
+            />
+
+            <IconButton
+              variant="outline"
+              width="40px"
+              height="40px"
+              marginBlockEnd="14px"
+              onClick={onOpenModalInfo}
+              icon={<Image width="18px" height="18px" src={InfoIcon} />}
+            />
+          </Flex>
+          <Box w="full">
             <Mediaview media={data?.media[0]} />
           </Box>
+          <Box px="4" py="8">
+            <Text lineHeight="1.8">{data?.description}</Text>
+          </Box>
+
+          <Flex px="4" w="full" align="center" gridGap="2">
+            <Box flex="1" h="1px" bg="gray.300" />
+            <Avatar size="md" src={data?.user.avatar} name={data?.user.name} />
+            <Box flex="1" h="1px" bg="gray.300" />
+          </Flex>
+          <Flex px="4" py="6" flexDir="column" align="center" gridGap="4">
+            <Text>{data?.user.name}</Text>
+            <Button colorScheme="pink" leftIcon={<EmailIcon />}>
+              Hire Me
+            </Button>
+          </Flex>
         </ModalBody>
       </ModalContent>
     </Modal>
@@ -128,9 +205,9 @@ const Content = ({ data }) => (
         marginInlineEnd="12px"
       />
       <div>
-        <Heading as="h3" textTransform="Capitalize" size="sm" mb="4px">
-          {data.title}
-        </Heading>
+        <Text as="h3" textTransform="capitalize" size="sm" mb="4px">
+          {data.title} xd
+        </Text>
         <Flex fontSize="sm" textColor="gray.700" letterSpacing="tight">
           <Text marginInlineEnd="12px">{data.user.name}</Text>{' '}
           <Text marginInlineEnd="12px">• Follow •</Text>
