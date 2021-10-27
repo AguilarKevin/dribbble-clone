@@ -42,7 +42,10 @@ export default function ShotsGrid() {
     <Suspense fallback={'Loading...'}>
       <Grid
         px={{ base: '2', md: '14' }}
-        gridTemplateColumns="repeat(auto-fill, minmax(260px, 1fr))"
+        gridTemplateColumns={{
+          base: '1',
+          md: 'repeat(auto-fill, minmax(23%, 1fr))',
+        }}
         gridGap={8}
       >
         {posts.map(post => (
