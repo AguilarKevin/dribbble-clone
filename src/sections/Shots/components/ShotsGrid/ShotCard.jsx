@@ -69,21 +69,14 @@ export default function ShotCard({ id, title, media, likes, views, user }) {
 
         <Flex align="center">
           <Button
-            size="xs"
-            fontSize="10px"
+            size="sm"
             color="gray.600"
             bg="white"
             leftIcon={<Image textColor="gray.600" src={HeartIcon} />}
           >
             211
           </Button>
-          <Button
-            size="xs"
-            fontSize="10px"
-            color="gray.600"
-            bg="white"
-            leftIcon={<ViewIcon />}
-          >
+          <Button size="sm" color="gray.600" bg="white" leftIcon={<ViewIcon />}>
             11.4K
           </Button>
         </Flex>
