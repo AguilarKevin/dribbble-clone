@@ -6,10 +6,17 @@ import { Flex, Text, Box, Badge } from '@chakra-ui/layout'
 import { IconButton, Button } from '@chakra-ui/button'
 import { Image } from '@chakra-ui/image'
 import { Avatar } from '@chakra-ui/avatar'
+import { Link } from 'react-router-dom'
 
-export default function ShotCard({ title, media, likes, views, user }) {
+export default function ShotCard({ id, title, media, likes, views, user }) {
   return (
-    <Flex flexDir="column" w="100%" gridGap="14px">
+    <Link
+      to={`/shots/${id}`}
+      d="flex"
+      flexDirection="column"
+      w="100%"
+      gap="14px"
+    >
       <Mediaview media={media}>
         <Flex
           h="full"
@@ -44,7 +51,7 @@ export default function ShotCard({ title, media, likes, views, user }) {
           />
         </Flex>
       </Mediaview>
-      <Flex h="34px">
+      <Flex h="34px" justify="space-between">
         <Flex align="center">
           <Avatar size="xs" name="test" mr="1.5" src={user.Avatar} />
           <Text mr="1.5" noOfLines="1" fontSize="xs" fontWeight="bold">
@@ -62,26 +69,19 @@ export default function ShotCard({ title, media, likes, views, user }) {
 
         <Flex align="center">
           <Button
-            size="xs"
-            fontSize="10px"
+            size="sm"
             color="gray.600"
             bg="white"
             leftIcon={<Image textColor="gray.600" src={HeartIcon} />}
           >
             211
           </Button>
-          <Button
-            size="xs"
-            fontSize="10px"
-            color="gray.600"
-            bg="white"
-            leftIcon={<ViewIcon />}
-          >
+          <Button size="sm" color="gray.600" bg="white" leftIcon={<ViewIcon />}>
             11.4K
           </Button>
         </Flex>
       </Flex>
-    </Flex>
+    </Link>
   )
 }
 

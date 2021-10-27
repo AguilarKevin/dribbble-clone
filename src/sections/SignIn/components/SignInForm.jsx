@@ -61,11 +61,7 @@ export default function SignInForm() {
               <Text fontWeight="bold" fontSize="14.5px">
                 Username or Email Address
               </Text>
-              <Input
-                // onChange={handleChange}
-                variant="filled"
-                borderRadius="lg"
-              />
+              <Input variant="filled" borderRadius="lg" />
             </Stack>
 
             <Stack w="full">

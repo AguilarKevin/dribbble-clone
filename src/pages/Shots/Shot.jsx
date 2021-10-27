@@ -13,94 +13,121 @@ import {
   ModalOverlay,
   SlideFade,
   Spacer,
-  Spinner,
   Stack,
   Text,
   useDisclosure,
+  Hide,
+  Show,
 } from '@chakra-ui/react'
-import React from 'react'
-import { useQuery } from 'react-query'
-import { Link, useNavigate } from 'react-router-dom'
-import { getShot } from '../../providers/PostsProvider'
+
+import { Link } from 'react-router-dom'
 
 import HeartIcon from '../../assets/heart.svg'
 import MessageIcon from '../../assets/message.svg'
 import ShareIcon from '../../assets/share.svg'
 import InfoIcon from '../../assets/info.svg'
 import SaveIcon from '../../assets/save-folder.svg'
-import { format } from 'date-fns'
+// import { format } from 'date-fns'
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router'
 
-export default function ViewShotModal({ shotId }) {
-  const [open, setOpen] = React.useState(true)
+import fetchGraphQL from '../../FetchGraphQL.js'
+import MobileShotModal from '../../components/MobileShotModal'
+import ShotModal from '../../components/ShotModal'
 
-  const { isLoading, data } = useQuery(['get shot', shotId], () =>
-    getShot(shotId)
-  )
+export default function Shot() {
+  const location = useLocation()
+
   const navigate = useNavigate()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const [data, setData] = useState(null)
+  const [currentMedia, setCurrentMedia] = useState(0)
+
+  useEffect(() => {
+    fetchGraphQL(`
+		query Shot{
+			shot(id: ${location.pathname.replace('/shots/', '')}){
+				id
+				title
+				description
+				saves
+				views
+				media {
+					domain
+					path
+					mimetype
+				}
+				user {
+					name
+					avatar
+					tag
+				}
+				tags{
+					name
+					slug
+				}
+			}
+		}
+	`)
+      .then(response => {
+        setData(response.data.shot)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }, [location.pathname])
+
+  const { onOpenModalInfo } = useDisclosure()
 
   return (
-    <Modal
-      onClose={() => {
-        setOpen(false)
-        navigate(-1)
-      }}
-      size="full"
-      isOpen={open}
-      scrollBehavior="inside"
-      motionPreset="slideInBottom"
-    >
-      <ModalOverlay />
-      <ModalContent bg="transparent">
-        <ModalCloseButton color="white" right="2px" top="2px" />
-        <ModalHeader pb="20px"></ModalHeader>
-        <ModalBody bg="white" borderTopLeftRadius="14px">
-          {isLoading && spinner}
-          {data && content(data)}
-          {data && floatinButtons(data, onOpen)}
-          {data && modalInfo(isOpen, onClose, data)}
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+    <>
+      <Hide above="md">
+        <MobileShotModal
+          {...{
+            data,
+            navigate,
+            currentMedia,
+            setCurrentMedia,
+            onOpenModalInfo,
+          }}
+        />
+      </Hide>
+      <Show above="md">
+        <ShotModal
+          {...{
+            data,
+            navigate,
+            currentMedia,
+            setCurrentMedia,
+            onOpenModalInfo,
+          }}
+        />
+      </Show>
+    </>
   )
 }
 
-const spinner = (
-  <Flex py={3} align="center" justify="center">
-    <Spinner
-      thickness="4px"
-      speed="0.65s"
-      emptyColor="gray.200"
-      color="pink.500"
-      size="xl"
-    />
-  </Flex>
-)
-
-const content = ({
-  id,
-  title,
-  description,
-  likes,
-  views,
-  user,
-  media,
-  tags,
-}) => (
+const Content = ({ data }) => (
   <>
-    <Flex maxWidth="60%" mx="auto" align="center" justify="center" mt="56px">
+    <Flex
+      maxWidth="60%"
+      mx="auto"
+      align="center"
+      justify="center"
+      mt={{ md: '56px' }}
+    >
       <Avatar
         size="md"
-        src={user.avatar}
-        name={user.name}
+        src={data.user.avatar}
+        name={data.user.name}
         marginInlineEnd="12px"
       />
       <div>
-        <Heading as="h3" textTransform="Capitalize" size="sm" mb="4px">
-          {title}
-        </Heading>
+        <Text as="h3" textTransform="capitalize" size="sm" mb="4px">
+          {data.title} xd
+        </Text>
         <Flex fontSize="sm" textColor="gray.700" letterSpacing="tight">
-          <Text marginInlineEnd="12px">{user.name}</Text>{' '}
+          <Text marginInlineEnd="12px">{data.user.name}</Text>{' '}
           <Text marginInlineEnd="12px">• Follow •</Text>
           <Text color="pink.500">Hire me</Text>
         </Flex>
@@ -127,7 +154,7 @@ const content = ({
       mx="auto"
       mt="44px"
       borderRadius="10px "
-      src={`${media[0].domain}${media[0].path}`}
+      src={`${data.media[0].domain}${data.media[0].path}`}
     />
 
     <Flex
@@ -138,7 +165,7 @@ const content = ({
       gridColumnGap="20px"
       mt="20px"
     >
-      {media.map(file => (
+      {data.media.map(file => (
         <Image
           id="modal-imageview"
           height="54px"
@@ -151,12 +178,12 @@ const content = ({
     </Flex>
 
     <Text mt="54px" width="60%" mx="auto" fontSize="xl" lineHeight="1.6">
-      {description}
+      {data.description}
     </Text>
   </>
 )
 
-const floatinButtons = ({ user }, onOpen) => (
+const FloatinButtons = ({ user, onOpenModalInfo }) => (
   <Flex
     flexDirection="column"
     align="center"
@@ -164,6 +191,7 @@ const floatinButtons = ({ user }, onOpen) => (
     top="84px"
     right="34px"
   >
+    {console.log(user)}
     <Avatar
       width="40px"
       height="40px"
@@ -192,7 +220,7 @@ const floatinButtons = ({ user }, onOpen) => (
       width="40px"
       height="40px"
       marginBlockEnd="14px"
-      onClick={onOpen}
+      onClick={onOpenModalInfo}
       icon={<Image width="18px" height="18px" src={InfoIcon} />}
     />
     <SlideFade in={true} offsetY="-20px">
@@ -216,11 +244,15 @@ const floatinButtons = ({ user }, onOpen) => (
   </Flex>
 )
 
-const modalInfo = (
+const ModalInfo = ({
+  likes,
+  saves,
+  views,
+  created_at,
+  tags,
   isOpen,
   onClose,
-  { likes, saves, views, created_at, tags }
-) => (
+}) => (
   <Modal isOpen={isOpen} onClose={onClose}>
     <ModalOverlay />
     <ModalContent>
@@ -236,7 +268,7 @@ const modalInfo = (
       />
       <ModalBody mx="38px" mb="38px" letterSpacing="tight">
         <Text fontWeight="regular" fontSize="15px" color="gray.600">
-          Posted {format(new Date(created_at), 'MMMM dd, yyyy')}
+          Posted {created_at}
         </Text>
         <Flex mt="24px" gridColumnGap="24px">
           <Stack>
