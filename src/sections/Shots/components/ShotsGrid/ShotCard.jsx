@@ -10,13 +10,7 @@ import { Link } from 'react-router-dom'
 
 export default function ShotCard({ id, title, media, likes, views, user }) {
   return (
-    <Link
-      to={`/shots/${id}`}
-      d="flex"
-      flexDirection="column"
-      w="100%"
-      gap="14px"
-    >
+    <Link to={`/shots/${id}`} d="flex" w="100%" gap="14px">
       <Mediaview media={media}>
         <Flex
           h="full"

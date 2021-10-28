@@ -8,15 +8,19 @@ import { useGoogleLogin } from 'react-google-login'
 import { useCookies } from 'react-cookie'
 
 import GoogleLogo from '../../../assets/google.svg'
+import { useNavigate } from 'react-router-dom'
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 export default function GoogleLoginButton() {
+  const navigate = useNavigate()
+
   const [, setCookie] = useCookies(['googleAuthToken'])
 
   const { signIn } = useGoogleLogin({
     onSuccess: userData => {
       setCookie('googleAuthToken', userData.tokenObj.access_token)
+      navigate('/')
     },
     onFailure: res => console.log(res),
     accessType: 'online',

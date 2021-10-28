@@ -7,10 +7,11 @@ import {
 } from '@chakra-ui/accordion'
 import { SearchIcon } from '@chakra-ui/icons'
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/input'
-import { Box, Stack, Text } from '@chakra-ui/layout'
+import { Box, Divider, Stack, Text } from '@chakra-ui/layout'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import { Flex } from '@chakra-ui/react'
+import NavigationProfile from './NavigationProfile'
 
 const navMenuItems = [
   {
@@ -59,7 +60,7 @@ export default function NavigationMenu({ navOpen }) {
       py="6"
       zIndex="10"
     >
-      <Flex flexDir="column" gridGap="4">
+      <Flex flexDir="column" gridGap="6">
         <InputGroup>
           <InputLeftElement
             pointerEvents="none"
@@ -79,7 +80,6 @@ export default function NavigationMenu({ navOpen }) {
             placeholder="Search"
           />
         </InputGroup>
-
         <Accordion allowMultiple>
           {navMenuItems.map(item =>
             item.options ? (
@@ -140,6 +140,8 @@ export default function NavigationMenu({ navOpen }) {
             )
           )}
         </Accordion>
+        <Divider />
+        <NavigationProfile />
       </Flex>
     </Stack>
   )

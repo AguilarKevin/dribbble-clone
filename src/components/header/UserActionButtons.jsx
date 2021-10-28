@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function UserActionButtons() {
   const navigate = useNavigate()
+
   return (
     <Flex flex={{ base: '0', md: '1' }} justify="end" align="center">
       <Button
