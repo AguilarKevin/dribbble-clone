@@ -3,15 +3,21 @@ import { Image } from '@chakra-ui/image'
 import { Flex, Text } from '@chakra-ui/layout'
 
 import React from 'react'
+
 import { useGoogleLogin } from 'react-google-login'
+import { useCookies } from 'react-cookie'
 
 import GoogleLogo from '../../../assets/google.svg'
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 export default function GoogleLoginButton() {
+  const [, setCookie] = useCookies(['googleAuthToken'])
+
   const { signIn } = useGoogleLogin({
-    onSuccess: res => console.log(res),
+    onSuccess: userData => {
+      setCookie('googleAuthToken', userData.tokenObj.access_token)
+    },
     onFailure: res => console.log(res),
     accessType: 'online',
     clientId,
