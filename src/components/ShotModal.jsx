@@ -1,12 +1,11 @@
 import { Button, IconButton } from '@chakra-ui/button'
 import { Image } from '@chakra-ui/image'
-import { Box, Flex, Heading, Spacer, Stack, Text } from '@chakra-ui/layout'
+import { Box, Flex, Spacer, Stack, Text } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
 
@@ -17,7 +16,6 @@ import InfoIcon from '../assets/info.svg'
 import SaveIcon from '../assets/save-folder.svg'
 
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Avatar } from '@chakra-ui/avatar'
 import Mediaview from './Mediaview'
 import { EmailIcon } from '@chakra-ui/icons'
