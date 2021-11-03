@@ -9,8 +9,6 @@ import { useGoogleLogin } from 'react-google-login'
 import GoogleLogo from '../../../assets/google.svg'
 import { useNavigate } from 'react-router-dom'
 
-const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
-
 export default function GoogleLoginButton({ onSignIn }) {
   const navigate = useNavigate()
 
@@ -20,7 +18,7 @@ export default function GoogleLoginButton({ onSignIn }) {
     },
     onFailure: res => console.log(res),
     accessType: 'online',
-    clientId,
+    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
     autoLoad: true,
     isSignedIn: true,
   })

@@ -2,12 +2,18 @@ import { Button } from '@chakra-ui/button'
 import { Flex } from '@chakra-ui/layout'
 
 import { Show } from '@chakra-ui/media-query'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../../UserContextProvider'
 
 export default function UserActionButtons() {
   const navigate = useNavigate()
 
+  const context = useContext(UserContext)
+
+  if (context.user) {
+    return <>logged</>
+  }
   return (
     <Flex flex={{ base: '0', md: '1' }} justify="end" align="center">
       <Button

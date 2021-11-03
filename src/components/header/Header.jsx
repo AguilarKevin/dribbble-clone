@@ -14,7 +14,7 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 export default function Header() {
   const [user, setUser] = useState(null)
 
-  const { signIn, loaded } = useGoogleLogin({
+  const { loaded } = useGoogleLogin({
     onSuccess: userData => {
       setUser({
         avatar: userData.profileObj.imageUrl,
@@ -24,7 +24,7 @@ export default function Header() {
     onFailure: res => console.log(res),
     clientId,
     accessType: 'online',
-    autoLoad: true,
+    // autoLoad: true,
     isSignedIn: true,
   })
 

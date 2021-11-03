@@ -9,9 +9,11 @@ import { SearchIcon } from '@chakra-ui/icons'
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/input'
 import { Box, Divider, Stack, Text } from '@chakra-ui/layout'
 import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Flex } from '@chakra-ui/react'
 import NavigationProfile from './NavigationProfile'
+
+import { UserContext } from '../../../UserContextProvider'
 
 const navMenuItems = [
   {
@@ -46,6 +48,7 @@ const navMenuItems = [
 ]
 
 export default function NavigationMenu({ navOpen }) {
+  const { user } = useContext(UserContext)
   return (
     <Stack
       bg="white"
@@ -140,8 +143,13 @@ export default function NavigationMenu({ navOpen }) {
             )
           )}
         </Accordion>
-        <Divider />
-        <NavigationProfile />
+
+        {user && (
+          <>
+            <Divider />
+            <NavigationProfile />
+          </>
+        )}
       </Flex>
     </Stack>
   )

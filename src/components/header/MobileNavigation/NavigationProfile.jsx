@@ -2,6 +2,7 @@ import { Avatar } from '@chakra-ui/avatar'
 import { Button } from '@chakra-ui/button'
 import { Flex, Text } from '@chakra-ui/layout'
 import React, { useContext } from 'react'
+import { useGoogleLogout } from 'react-google-login'
 
 import { UserContext } from '../../../UserContextProvider'
 
@@ -18,6 +19,13 @@ const profileLinks = [
 
 export default function NavigationProfile() {
   const context = useContext(UserContext)
+
+  const { signOut } = useGoogleLogout({
+    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    onLogoutSuccess: () => {
+      context.setUser(null)
+    },
+  })
 
   return (
     <>
@@ -59,6 +67,7 @@ export default function NavigationProfile() {
           letterSpacing="-0.03em"
           justifyContent="left"
           px="0"
+          onClick={signOut}
         >
           Sign Out
         </Button>
