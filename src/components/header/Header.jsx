@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Flex } from '@chakra-ui/react'
 import { Hide, Show } from '@chakra-ui/media-query'
 
@@ -7,12 +7,32 @@ import MobileNavigation from './MobileNavigation/MobileNavigation'
 import Navigation from './Navigation'
 import UserActionButtons from './UserActionButtons'
 import { UserContext } from '../../UserContextProvider'
+import { useGoogleLogin } from 'react-google-login'
+
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 export default function Header() {
+  const [user, setUser] = useState(null)
+
+  const { signIn, loaded } = useGoogleLogin({
+    onSuccess: userData => {
+      setUser({
+        avatar: userData.profileObj.imageUrl,
+        name: userData.profileObj.name,
+      })
+    },
+    onFailure: res => console.log(res),
+    clientId,
+    accessType: 'online',
+    autoLoad: true,
+    isSignedIn: true,
+  })
+
+  if (loaded) {
+    console.log(user)
+  }
   return (
-    <UserContext.Provider
-      value={{ user: { name: 'Kevin Aguilar', avatar: '' } }}
-    >
+    <UserContext.Provider value={{ user }}>
       <Flex
         h={{ base: '60px', md: '80px' }}
         justify={{ base: 'space-between', md: 'start' }}

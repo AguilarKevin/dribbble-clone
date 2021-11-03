@@ -28,8 +28,9 @@ export default function NavigationProfile() {
         </Text>
       </Flex>
       <Flex flexDir="column" gridGap={6}>
-        {profileLinks.map(link => (
+        {profileLinks.map((link, index) => (
           <Text
+            key={index}
             fontSize="17"
             textColor="gray.500"
             fontWeight="medium"
