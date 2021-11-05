@@ -32,7 +32,7 @@ export default function Header() {
     console.log(user)
   }
   return (
-    <UserContext.Provider value={{ user }}>
+    <UserContext.Provider value={{ user, setUser }}>
       <Flex
         h={{ base: '60px', md: '80px' }}
         justify={{ base: 'space-between', md: 'start' }}
