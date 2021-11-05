@@ -194,7 +194,7 @@ export default function ShotModal({
                 icon={<Image width="18px" height="18px" src={InfoIcon} />}
               />
               <SlideFade in={true} offsetY="-20px">
-                <Flex flexDirection="column">
+                <Flex flexDir="column">
                   <IconButton
                     variant="outline"
                     width="40px"

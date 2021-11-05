@@ -79,14 +79,12 @@ export default function MobileShotModal({
               variant="outline"
               width="40px"
               height="40px"
-              marginBlockEnd="14px"
               icon={<Image width="18px" height="18px" src={SaveIcon} />}
             />
             <IconButton
               variant="outline"
               width="40px"
               height="40px"
-              marginBlockEnd="14px"
               icon={<Image width="18px" height="18px" src={HeartIcon} />}
             />
             <Spacer />
@@ -94,7 +92,6 @@ export default function MobileShotModal({
               variant="outline"
               width="40px"
               height="40px"
-              marginBlockEnd="14px"
               icon={<Image width="18px" height="18px" src={MessageIcon} />}
             />
 
@@ -102,7 +99,6 @@ export default function MobileShotModal({
               variant="outline"
               width="40px"
               height="40px"
-              marginBlockEnd="14px"
               icon={<Image width="18px" height="18px" src={ShareIcon} />}
             />
 
@@ -110,7 +106,6 @@ export default function MobileShotModal({
               variant="outline"
               width="40px"
               height="40px"
-              marginBlockEnd="14px"
               onClick={onOpenModalInfo}
               icon={<Image width="18px" height="18px" src={InfoIcon} />}
             />
@@ -128,6 +123,7 @@ export default function MobileShotModal({
             {data?.media.map((media, index) => {
               return index === currentMedia ? (
                 <Box
+                  key={index}
                   flex="1"
                   borderRadius="md"
                   overflow="hidden"
@@ -148,6 +144,7 @@ export default function MobileShotModal({
                 </Box>
               ) : (
                 <Box
+                  key={index}
                   flex="1"
                   borderRadius="md"
                   overflow="hidden"
