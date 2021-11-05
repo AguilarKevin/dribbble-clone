@@ -1,10 +1,12 @@
-import { Button } from '@chakra-ui/button'
-import { Flex } from '@chakra-ui/layout'
+import { Button, IconButton } from '@chakra-ui/button'
+import { Box, Flex } from '@chakra-ui/layout'
 
 import { Show } from '@chakra-ui/media-query'
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../UserContextProvider'
+import BagIcon from '../../assets/bag.svg'
+import { Image } from '@chakra-ui/image'
 
 export default function UserActionButtons() {
   const navigate = useNavigate()
@@ -12,7 +14,11 @@ export default function UserActionButtons() {
   const context = useContext(UserContext)
 
   if (context.user) {
-    return <>logged</>
+    return (
+      <Button p="2" variant="ghost">
+        <Image w="18px" h="18px" src={BagIcon} />
+      </Button>
+    )
   }
   return (
     <Flex flex={{ base: '0', md: '1' }} justify="end" align="center">
