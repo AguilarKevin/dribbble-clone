@@ -31,7 +31,7 @@ export default function ShowByMenu({ showByOptions, showBy, setShowBy }) {
         {showBy}
         <ChevronDownIcon marginInlineStart={4} />
       </MenuButton>
-      <MenuList zIndex="5" textColor="gray.600" fontSize={12}>
+      <MenuList zIndex="20" textColor="gray.600" fontSize={12}>
         <MenuOptionGroup defaultValue={showBy} type="radio">
           {showByOptions.map((option, index) => (
             <React.Fragment key={option}>
