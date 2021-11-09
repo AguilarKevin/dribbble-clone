@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Flex } from '@chakra-ui/react'
+import { Flex, Spacer } from '@chakra-ui/react'
 import { Hide, Show } from '@chakra-ui/media-query'
 
 import AppLogo from './AppLogo'
@@ -24,7 +24,7 @@ export default function Header() {
     onFailure: res => console.log(res),
     clientId,
     accessType: 'online',
-    // autoLoad: true,
+    autoLoad: true,
     isSignedIn: true,
   })
 
@@ -52,6 +52,7 @@ export default function Header() {
         <AppLogo />
         <Show above="md">
           <Navigation />
+          <Spacer />
         </Show>
         <UserActionButtons />
       </Flex>
