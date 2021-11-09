@@ -28,11 +28,8 @@ export default function Header() {
     isSignedIn: true,
   })
 
-  if (loaded) {
-    console.log(user)
-  }
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, loaded }}>
       <Flex
         h={{ base: '60px', md: '80px' }}
         justify={{ base: 'space-between', md: 'start' }}

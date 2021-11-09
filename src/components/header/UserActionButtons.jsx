@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/button'
-import { Flex } from '@chakra-ui/layout'
+import { Flex, Spacer } from '@chakra-ui/layout'
 
 import { Show } from '@chakra-ui/media-query'
 import React, { useContext } from 'react'
@@ -15,9 +15,10 @@ export default function UserActionButtons() {
 
   const context = useContext(UserContext)
 
-  if (context.user) {
+  if (context?.user) {
+    console.log(context.user)
     return (
-      <Flex gridGap="4" paddingInlineEnd={{ md: '2' }}>
+      <Flex paddingInlineEnd={{ md: '2' }}>
         <Show above="md">
           <InputGroup
             maxWidth="160px"
@@ -29,16 +30,19 @@ export default function UserActionButtons() {
             <Input placeholder="search" />
           </InputGroup>
         </Show>
-        <Button p="0" variant="ghost">
+        <Spacer w="4px" />
+        <Button variant="ghost">
           <Image w="18px" h="18px" src={BagIcon} />
         </Button>
+        <Spacer w="4px" />
         <Show above="md">
           <Avatar
             width="40px"
             height="40px"
-            src={context.user.avatar}
-            name={context.user.name}
+            src={context?.user?.avatar}
+            name={context?.user?.name}
           />
+          <Spacer width="12px" />
           <Button
             borderRadius={8}
             fontSize={14}
