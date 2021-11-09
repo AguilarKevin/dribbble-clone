@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Flex } from '@chakra-ui/react'
+import { Flex, Spacer } from '@chakra-ui/react'
 import { Hide, Show } from '@chakra-ui/media-query'
 
 import AppLogo from './AppLogo'
@@ -24,15 +24,12 @@ export default function Header() {
     onFailure: res => console.log(res),
     clientId,
     accessType: 'online',
-    // autoLoad: true,
+    autoLoad: true,
     isSignedIn: true,
   })
 
-  if (loaded) {
-    console.log(user)
-  }
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, loaded }}>
       <Flex
         h={{ base: '60px', md: '80px' }}
         justify={{ base: 'space-between', md: 'start' }}
@@ -52,6 +49,7 @@ export default function Header() {
         <AppLogo />
         <Show above="md">
           <Navigation />
+          <Spacer />
         </Show>
         <UserActionButtons />
       </Flex>

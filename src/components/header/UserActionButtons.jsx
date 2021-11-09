@@ -1,5 +1,5 @@
-import { Button, IconButton } from '@chakra-ui/button'
-import { Box, Flex } from '@chakra-ui/layout'
+import { Button } from '@chakra-ui/button'
+import { Flex, Spacer } from '@chakra-ui/layout'
 
 import { Show } from '@chakra-ui/media-query'
 import React, { useContext } from 'react'
@@ -7,21 +7,65 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../UserContextProvider'
 import BagIcon from '../../assets/bag.svg'
 import { Image } from '@chakra-ui/image'
+import { Avatar, InputGroup, Input, InputLeftElement } from '@chakra-ui/react'
+import { SearchIcon } from '@chakra-ui/icons'
 
 export default function UserActionButtons() {
   const navigate = useNavigate()
 
   const context = useContext(UserContext)
 
-  if (context.user) {
+  if (context?.user) {
+    console.log(context.user)
     return (
-      <Button p="2" variant="ghost">
-        <Image w="18px" h="18px" src={BagIcon} />
-      </Button>
+      <Flex paddingInlineEnd={{ md: '2' }}>
+        <Show above="md">
+          <InputGroup
+            maxWidth="160px"
+            bg="gray.200"
+            borderRadius="8"
+            overflow="hidden"
+          >
+            <InputLeftElement children={<SearchIcon />} />
+            <Input placeholder="search" />
+          </InputGroup>
+        </Show>
+        <Spacer w="4px" />
+        <Button variant="ghost">
+          <Image w="18px" h="18px" src={BagIcon} />
+        </Button>
+        <Spacer w="4px" />
+        <Show above="md">
+          <Avatar
+            width="40px"
+            height="40px"
+            src={context?.user?.avatar}
+            name={context?.user?.name}
+          />
+          <Spacer width="12px" />
+          <Button
+            borderRadius={8}
+            fontSize={14}
+            paddingBlock="0px"
+            paddingInline="4"
+            mr="8"
+            color="white"
+            bg="pink.500"
+            colorScheme="pink"
+          >
+            Upload
+          </Button>
+        </Show>
+      </Flex>
     )
   }
   return (
-    <Flex flex={{ base: '0', md: '1' }} justify="end" align="center">
+    <Flex
+      flex={{ base: '0', md: '1' }}
+      justify="end"
+      align="center"
+      paddingInlineEnd={{ md: '2' }}
+    >
       <Button
         size="lg"
         fontWeight="regular"
