@@ -8,18 +8,20 @@ import ShotCard from './ShotCard'
 const ShotsQuery = `
   query Shots{
     shots{
-      id
-      title
-      description
-      media {
-        domain
-        path
-        mimetype
-      }
-      user {
-        name
-        avatar
-        tag
+      data{
+        id
+        title
+        description
+        media {
+          domain
+          path
+          mimetype
+        }
+        user {
+          name
+          avatar
+          tag
+        }
       }
     }
   }
@@ -30,8 +32,8 @@ export default function ShotsGrid() {
 
   useEffect(() => {
     fetchGraphQL(ShotsQuery)
-      .then(response => {
-        setPosts(response.data.shots)
+      .then(({ data }) => {
+        setPosts(data.shots.data)
       })
       .catch(error => {
         console.error(error)
